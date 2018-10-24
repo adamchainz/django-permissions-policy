@@ -1,0 +1,10 @@
+docutils
+flake8
+flake8-commas
+isort
+multilint
+pygments
+pytest
+pytest-cov
+pytest-django
+pytz
