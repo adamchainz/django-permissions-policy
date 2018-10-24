@@ -1,7 +1,7 @@
 django-feature-policy
 =====================
 
-Set the draft HTTP header ``Feature-Policy`` on your Django app.
+Set the draft security HTTP header ``Feature-Policy`` on your Django app.
 
 Requirements
 ------------

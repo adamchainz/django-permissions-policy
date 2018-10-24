@@ -23,7 +23,7 @@ with codecs.open('HISTORY.rst', 'r', 'utf-8') as history_file:
 setup(
     name='django-feature-policy',
     version=version,
-    description='Set the experimental security header Feature-Policy on your Django app.',
+    description='Set the draft security HTTP header Feature-Policy on your Django app.',
     long_description=readme + '\n\n' + history,
     author='Adam Johnson',
     author_email='me@adamj.eu',
