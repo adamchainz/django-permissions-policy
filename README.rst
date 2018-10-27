@@ -1,6 +1,12 @@
 django-feature-policy
 =====================
 
+.. image:: https://img.shields.io/travis/adamchainz/django-feature-policy/master.svg
+        :target: https://travis-ci.org/adamchainz/django-feature-policy
+
+.. image:: https://img.shields.io/pypi/v/django-feature-policy.svg
+        :target: https://pypi.python.org/pypi/django-feature-policy
+
 Set the draft security HTTP header ``Feature-Policy`` on your Django app.
 
 Requirements
