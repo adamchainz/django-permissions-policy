@@ -16,6 +16,7 @@ FEATURE_NAMES = [
     'geolocation',
     'gyroscope',
     'image-compression',
+    'lazyload',
     'legacy-image-formats',
     'magnetometer',
     'max-downscaling-image',
