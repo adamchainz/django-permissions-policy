@@ -17,6 +17,8 @@ Tested with all combinations of:
 * Python: 3.6
 * Django: 2.0, 2.1
 
+Python 3.4+ supported.
+
 Installation
 ------------
 
