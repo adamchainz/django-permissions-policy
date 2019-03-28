@@ -51,7 +51,7 @@ header gets set.
 This should be a dictionary laid out with:
 
 * Keys as the names of browser features - a full list is available on the
-  `MDN article`_.
+  `W3 Spec repository`_. The `MDN article`_ is also worth reading.
 * Values as lists of strings, where each string is either an origin, e.g.
   ``'https://example.com'``, or of the special values ``'self'``, ``'none'``,
   or ``'*'``. If there is just one value, no containing list is necessary. Note
@@ -59,12 +59,13 @@ This should be a dictionary laid out with:
   around them - do not include these quotes in your Python string, they will be
   added by the middleware.
 
+.. _W3 Spec repository: https://github.com/w3c/webappsec-feature-policy/blob/master/features.md
 .. _MDN article: https://developer.mozilla.org/en-US/docs/Web/HTTP/Feature_Policy#Browser_compatibility
 
 If the keys or values are invalid, ``ImproperlyConfigured`` will be raised at
 instantiation time, or when processing a response. The current feature list is
-pulled from the JavaScript API with ``document.policy.allowedFeatures()`` on
-the latest Chrome build.
+pulled from the JavaScript API with
+``document.featurePolicy.allowedFeatures()`` on Chrome.
 
 Examples
 ~~~~~~~~
