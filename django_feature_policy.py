@@ -3,34 +3,37 @@ from django.core.exceptions import ImproperlyConfigured
 
 __version__ = '1.0.1'
 
-# Retrieved from Chrome document.policy.allowedFeatures()
+# Retrieved from Chrome document.featurePolicy.allowedFeatures()
 FEATURE_NAMES = [
     'accelerometer',
     'ambient-light-sensor',
-    'animations',
     'autoplay',
     'camera',
+    'document-domain',
     'document-write',
     'encrypted-media',
+    'font-display-late-swap',
     'fullscreen',
     'geolocation',
     'gyroscope',
-    'image-compression',
+    'layout-animations',
     'lazyload',
     'legacy-image-formats',
     'magnetometer',
-    'max-downscaling-image',
     'microphone',
     'midi',
+    'oversized-images',
     'payment',
     'picture-in-picture',
     'speaker',
     'sync-script',
     'sync-xhr',
+    'unoptimized-images',
     'unsized-media',
     'usb',
     'vertical-scroll',
     'vr',
+    'wake-lock',
 ]
 
 

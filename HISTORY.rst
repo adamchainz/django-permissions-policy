@@ -6,6 +6,13 @@ Pending release
 
 .. Insert new release notes below this line
 
+* Updated to the latest set of features from Chrome.
+  'animations', 'image-compression', and 'max-downscaling-image' have been
+  removed, whilst 'document-domain', 'font-display-late-swap',
+  'layout-animations', 'oversized-images', 'unoptimized-images', and
+  'wake-lock' have been added.
+  See more at https://github.com/w3c/webappsec-feature-policy/blob/master/features.md .
+
 1.0.1 (2019-01-02)
 ------------------
 
