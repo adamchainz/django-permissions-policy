@@ -6,6 +6,9 @@ Pending release
 
 .. Insert new release notes below this line
 
+2.0.0 (2019-03-29)
+------------------
+
 * Updated to the latest set of features from Chrome.
   'animations', 'image-compression', and 'max-downscaling-image' have been
   removed, whilst 'document-domain', 'font-display-late-swap',

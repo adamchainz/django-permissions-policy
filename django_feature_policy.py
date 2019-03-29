@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
-__version__ = '1.0.1'
+__version__ = '2.0.0'
 
 # Retrieved from Chrome document.featurePolicy.allowedFeatures()
 FEATURE_NAMES = [
