@@ -11,7 +11,7 @@ docutils==0.14
 entrypoints==0.3          # via flake8
 flake8-commas==2.0.0
 flake8==3.7.7
-isort==4.3.16
+isort==4.3.17
 mccabe==0.6.1             # via flake8
 more-itertools==7.0.0     # via pytest
 multilint==2.4.0
@@ -23,5 +23,5 @@ pygments==2.3.1
 pytest-cov==2.6.1
 pytest-django==3.4.8
 pytest==4.4.0
-pytz==2018.9
+pytz==2019.1
 six==1.12.0               # via multilint, pytest
