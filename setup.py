@@ -30,7 +30,7 @@ setup(
     py_modules=['django_feature_policy'],
     include_package_data=True,
     install_requires=[
-        'Django',
+        'Django>=2',
     ],
     python_requires='>=3.4',
     license='ISC',
@@ -40,6 +40,7 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Framework :: Django :: 2.0',
         'Framework :: Django :: 2.1',
+        'Framework :: Django :: 2.2',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: ISC License (ISCL)',
         'Natural Language :: English',
