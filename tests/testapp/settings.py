@@ -2,7 +2,12 @@ DEBUG = False
 
 SECRET_KEY = 'not-secret'
 
-DATABASES = {}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'LOCATION': ':memory:',
+    },
+}
 
 ALLOWED_HOSTS = ['*']
 
