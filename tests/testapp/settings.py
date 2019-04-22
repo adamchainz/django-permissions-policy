@@ -5,8 +5,8 @@ SECRET_KEY = 'not-secret'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'LOCATION': ':memory:'
-    }
+        'LOCATION': ':memory:',
+    },
 }
 
 ALLOWED_HOSTS = ['*']
