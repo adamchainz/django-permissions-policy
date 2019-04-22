@@ -30,7 +30,7 @@ setup(
     py_modules=['django_feature_policy'],
     include_package_data=True,
     install_requires=[
-        'Django>=2',
+        'Django>=2.0',
     ],
     python_requires='>=3.4',
     license='ISC',

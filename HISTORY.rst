@@ -6,6 +6,8 @@ Pending release
 
 .. Insert new release notes below this line
 
+* Now tested on Django 2.2 (no code changes required).
+
 2.0.0 (2019-03-29)
 ------------------
 
