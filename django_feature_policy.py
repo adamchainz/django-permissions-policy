@@ -1,10 +1,10 @@
 from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import ImproperlyConfigured, MiddlewareNotUsed
 
 __version__ = '2.1.0'
 
 # Retrieved from Chrome document.featurePolicy.allowedFeatures()
-FEATURE_NAMES = [
+FEATURE_NAMES = {
     'accelerometer',
     'ambient-light-sensor',
     'autoplay',
@@ -34,19 +34,19 @@ FEATURE_NAMES = [
     'vertical-scroll',
     'vr',
     'wake-lock',
-]
+}
 
 
 class FeaturePolicyMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        self.get_header_value()  # to check
+        self.header_value = self.get_header_value()
+        if not self.header_value:
+            raise MiddlewareNotUsed()
 
     def __call__(self, request):
         response = self.get_response(request)
-        value = self.get_header_value()
-        if value:
-            response['Feature-Policy'] = value
+        response['Feature-Policy'] = self.header_value
         return response
 
     def get_header_value(self):
