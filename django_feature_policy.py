@@ -60,9 +60,7 @@ class FeaturePolicyMiddleware:
 
             item = [feature]
             for value in values:
-                if value == '*':
-                    item.append("'*'")
-                elif value == 'none':
+                if value == 'none':
                     item.append("'none'")
                 elif value == 'self':
                     item.append("'self'")
