@@ -20,7 +20,7 @@ def test_anyone_can_geolocate(client, settings):
 
     resp = client.get('/')
 
-    assert resp['Feature-Policy'] == "geolocation '*'"
+    assert resp['Feature-Policy'] == "geolocation *"
 
 
 def test_anyone_can_geolocate_list(client, settings):
@@ -28,7 +28,7 @@ def test_anyone_can_geolocate_list(client, settings):
 
     resp = client.get('/')
 
-    assert resp['Feature-Policy'] == "geolocation '*'"
+    assert resp['Feature-Policy'] == "geolocation *"
 
 
 def test_no_one_can_geolocate(client, settings):

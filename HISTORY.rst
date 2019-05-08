@@ -6,6 +6,8 @@ Pending release
 
 .. Insert new release notes below this line
 
+* Fix interpretation of '*' by not automatically adding quotes.
+
 2.1.0 (2019-04-28)
 ------------------
 
