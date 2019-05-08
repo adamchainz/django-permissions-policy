@@ -4,7 +4,10 @@ History
 Pending release
 ---------------
 
-.. Insert new release notes below this line
+.. Insert new release notes below this linen
+
+2.2.0 (2019-05-08)
+------------------
 
 * Fix interpretation of '*' by not automatically adding quotes.
 * Optimize header generation to reduce impact on every request.
