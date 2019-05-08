@@ -1,5 +1,8 @@
 from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured, MiddlewareNotUsed
+from django.core.exceptions import ImproperlyConfigured
+from django.core.signals import setting_changed
+from django.dispatch import receiver
+from django.utils.functional import cached_property
 
 __version__ = '2.1.0'
 
@@ -40,16 +43,17 @@ FEATURE_NAMES = {
 class FeaturePolicyMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        self.header_value = self.get_header_value()
-        if not self.header_value:
-            raise MiddlewareNotUsed()
+        receiver(setting_changed)(self.clear_header_value)
 
     def __call__(self, request):
         response = self.get_response(request)
-        response['Feature-Policy'] = self.header_value
+        value = self.header_value
+        if value:
+            response['Feature-Policy'] = value
         return response
 
-    def get_header_value(self):
+    @cached_property
+    def header_value(self):
         setting = getattr(settings, 'FEATURE_POLICY', {})
         pieces = []
         for feature, values in setting.items():
@@ -68,3 +72,10 @@ class FeaturePolicyMiddleware:
                     item.append(value)
             pieces.append(' '.join(item))
         return '; '.join(pieces)
+
+    def clear_header_value(self, setting, **kwargs):
+        if setting == 'FEATURE_POLICY':
+            try:
+                del self.header_value
+            except AttributeError:
+                pass

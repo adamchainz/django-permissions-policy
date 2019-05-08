@@ -81,3 +81,23 @@ def test_unknown_feature(client, settings):
 
     with pytest.raises(ImproperlyConfigured):
         client.get('/')
+
+
+def test_setting_changing(client, settings):
+    settings.FEATURE_POLICY = {}
+    client.get('/')  # Forces middleware instantiation
+    settings.FEATURE_POLICY = {'geolocation': 'self'}
+
+    resp = client.get('/')
+
+    assert resp['Feature-Policy'] == "geolocation 'self'"
+
+
+def test_other_setting_changing(client, settings):
+    settings.FEATURE_POLICY = {'geolocation': 'self'}
+    client.get('/')  # Forces middleware instantiation
+    settings.SECRET_KEY = 'foobar'
+
+    resp = client.get('/')
+
+    assert resp['Feature-Policy'] == "geolocation 'self'"

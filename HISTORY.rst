@@ -7,6 +7,7 @@ Pending release
 .. Insert new release notes below this line
 
 * Fix interpretation of '*' by not automatically adding quotes.
+* Optimize header generation to reduce impact on every request.
 
 2.1.0 (2019-04-28)
 ------------------
