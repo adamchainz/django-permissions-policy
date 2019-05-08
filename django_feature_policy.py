@@ -43,6 +43,7 @@ FEATURE_NAMES = {
 class FeaturePolicyMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
+        self.header_value  # Access at setup so ImproperlyConfigured can be raised
         receiver(setting_changed)(self.clear_header_value)
 
     def __call__(self, request):
