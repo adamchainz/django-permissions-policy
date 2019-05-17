@@ -4,7 +4,12 @@ History
 Pending release
 ---------------
 
-.. Insert new release notes below this linen
+.. Insert new release notes below this line
+
+* Update Python support to 3.5-3.7, as 3.4 has reached its end of life.
+
+* Make the generated header deterministic by iterating the settings dict in
+  sorted order.
 
 2.2.0 (2019-05-08)
 ------------------
