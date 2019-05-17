@@ -11,6 +11,8 @@ Pending release
 * Make the generated header deterministic by iterating the settings dict in
   sorted order.
 
+* Support Django 1.11 for completeness.
+
 2.2.0 (2019-05-08)
 ------------------
 
