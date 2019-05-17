@@ -57,7 +57,7 @@ class FeaturePolicyMiddleware:
     def header_value(self):
         setting = getattr(settings, 'FEATURE_POLICY', {})
         pieces = []
-        for feature, values in setting.items():
+        for feature, values in sorted(setting.items()):
             if feature not in FEATURE_NAMES:
                 raise ImproperlyConfigured('Unknown feature {}'.format(feature))
             if isinstance(values, str):

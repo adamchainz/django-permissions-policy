@@ -12,12 +12,9 @@ Set the draft security HTTP header ``Feature-Policy`` on your Django app.
 Requirements
 ------------
 
-Tested with all combinations of:
+Python 3.5-3.7 supported.
 
-* Python: 3.6
-* Django: 2.0, 2.1, 2.2
-
-Python 3.4+ supported.
+Django 2.0-2.2 supported.
 
 Installation
 ------------
