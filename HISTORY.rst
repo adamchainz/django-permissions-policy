@@ -6,6 +6,9 @@ Pending release
 
 .. Insert new release notes below this line
 
+* Stop marking the distributed wheel as universal. Python 2 was never supported
+  so the wheel was never actually universal.
+
 2.3.0 (2019-05-19)
 ------------------
 
