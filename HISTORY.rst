@@ -6,6 +6,9 @@ Pending release
 
 .. Insert new release notes below this line
 
+2.3.0 (2019-05-19)
+------------------
+
 * Update Python support to 3.5-3.7, as 3.4 has reached its end of life.
 
 * Make the generated header deterministic by iterating the settings dict in
