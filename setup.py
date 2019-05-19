@@ -30,7 +30,7 @@ setup(
     py_modules=['django_feature_policy'],
     include_package_data=True,
     install_requires=[
-        'Django>=2.0',
+        'Django>=1.11',
     ],
     python_requires='>=3.5',
     license='ISC',
@@ -38,6 +38,7 @@ setup(
     keywords='Django',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
+        'Framework :: Django :: 1.11',
         'Framework :: Django :: 2.0',
         'Framework :: Django :: 2.1',
         'Framework :: Django :: 2.2',

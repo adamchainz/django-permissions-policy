@@ -14,7 +14,7 @@ Requirements
 
 Python 3.5-3.7 supported.
 
-Django 2.0-2.2 supported.
+Django 1.11-2.2 supported.
 
 Installation
 ------------
