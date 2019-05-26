@@ -7,7 +7,7 @@
 atomicwrites==1.3.0       # via pytest
 attrs==19.1.0             # via pytest
 coverage==4.5.3           # via pytest-cov
-django==2.2.1
+django==1.11.20
 docutils==0.14
 entrypoints==0.3          # via flake8
 flake8-commas==2.0.0
