@@ -1,25 +1,22 @@
 DEBUG = False
 
-SECRET_KEY = 'not-secret'
+SECRET_KEY = "not-secret"
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'LOCATION': ':memory:',
-    },
+    "default": {"ENGINE": "django.db.backends.sqlite3", "LOCATION": ":memory:"}
 }
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = []
 
 MIDDLEWARE = [
-    'django_feature_policy.FeaturePolicyMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    "django_feature_policy.FeaturePolicyMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
-ROOT_URLCONF = 'tests.testapp.urls'
+ROOT_URLCONF = "tests.testapp.urls"
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
 TEMPLATES = []
