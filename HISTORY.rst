@@ -6,6 +6,16 @@ Pending release
 
 .. Insert new release notes below this line
 
+* Updated to the latest set of features from Chrome. This removes
+  'legacy-image-formats' and 'unoptimized-images', and adds 17 new features:
+  'downloads-without-user-activation', 'focus-without-user-activation',
+  'forms', 'hid', 'idle-detection', 'loading-frame-default-eager', 'modals',
+  'orientation-lock', 'pointer-lock', 'popups', 'presentation', 'scripts',
+  'serial', 'top-navigation', 'unoptimized-lossless-images',
+  'unoptimized-lossless-images-strict' and  'unoptimized-lossy-images'. Note
+  that most of these are still experimental as can be seen on the [W3C feature
+  list](https://github.com/w3c/webappsec-feature-policy/blob/master/features.md).
+
 * Stop marking the distributed wheel as universal. Python 2 was never supported
   so the wheel was never actually universal.
 
