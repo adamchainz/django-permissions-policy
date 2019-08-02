@@ -6,6 +6,9 @@ Pending release
 
 .. Insert new release notes below this line
 
+3.0.0 (2019-08-02)
+------------------
+
 * Updated to the latest set of features from Chrome. This removes
   'legacy-image-formats' and 'unoptimized-images', and adds 17 new features:
   'downloads-without-user-activation', 'focus-without-user-activation',

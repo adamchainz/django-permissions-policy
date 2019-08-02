@@ -4,7 +4,7 @@ from django.core.signals import setting_changed
 from django.dispatch import receiver
 from django.utils.functional import cached_property
 
-__version__ = "2.3.0"
+__version__ = "3.0.0"
 
 # Retrieved from Chrome document.featurePolicy.allowedFeatures()
 # with flag "Experimental Web Platform features" turned on
