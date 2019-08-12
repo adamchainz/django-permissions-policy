@@ -27,6 +27,12 @@ setup(
     author="Adam Johnson",
     author_email="me@adamj.eu",
     url="https://github.com/adamchainz/django-feature-policy",
+    project_urls={
+        "Changelog": (
+            "https://github.com/adamchainz/django-feature-policy"
+            + "/blob/master/HISTORY.rst"
+        )
+    },
     py_modules=["django_feature_policy"],
     include_package_data=True,
     install_requires=["Django>=1.11"],
