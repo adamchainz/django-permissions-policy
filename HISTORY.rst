@@ -6,6 +6,13 @@ Pending release
 
 .. Insert new release notes below this line
 
+* Updated to the latest set of features from Chrome. This adds 17 new features:
+  'ch-device-memory', 'ch-downlink', 'ch-dpr', 'ch-ect', 'ch-lang', 'ch-rtt',
+  'ch-ua', 'ch-ua-arch', 'ch-ua-model', 'ch-ua-platform', 'ch-viewport-width',
+  'ch-width', 'execution-while-not-rendered', and
+  'execution-while-out-of-viewport'. Chrome has also removed support for
+  'speaker' but since this is still in the specification, it has been left.
+
 3.0.0 (2019-08-02)
 ------------------
 
