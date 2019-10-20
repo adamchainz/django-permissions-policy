@@ -12,6 +12,11 @@ Pending release
   'ch-width', 'execution-while-not-rendered', and
   'execution-while-out-of-viewport'. Chrome has also removed support for
   'speaker' but since this is still in the specification, it has been left.
+* Converted setuptools metadata to configuration file. This meant removing the
+  ``__version__`` attribute from the package. If you want to inspect the
+  installed version, use
+  ``pkg_resources.get_distribution("django-feature-policy").version``
+  (`docs <https://setuptools.readthedocs.io/en/latest/pkg_resources.html#getting-or-creating-distributions>`__).
 
 3.0.0 (2019-08-02)
 ------------------
