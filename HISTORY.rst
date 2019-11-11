@@ -18,6 +18,7 @@ Pending release
   ``importlib.metadata.version("django-feature-policy")``
   (`docs <https://docs.python.org/3.8/library/importlib.metadata.html#distribution-versions>`__ /
   `backport <https://pypi.org/project/importlib-metadata/>`__).
+* Update Python support to 3.5-3.8.
 
 3.0.0 (2019-08-02)
 ------------------
