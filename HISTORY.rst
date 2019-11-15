@@ -1,10 +1,8 @@
 History
 =======
 
-Pending release
----------------
-
-.. Insert new release notes below this line
+3.1.0 (2019-11-15)
+------------------
 
 * Updated to the latest set of features from Chrome. This adds 17 new features:
   'ch-device-memory', 'ch-downlink', 'ch-dpr', 'ch-ect', 'ch-lang', 'ch-rtt',
@@ -18,7 +16,7 @@ Pending release
   ``importlib.metadata.version("django-feature-policy")``
   (`docs <https://docs.python.org/3.8/library/importlib.metadata.html#distribution-versions>`__ /
   `backport <https://pypi.org/project/importlib-metadata/>`__).
-* Update Python support to 3.5-3.8.
+* Suport Python 3.8.
 
 3.0.0 (2019-08-02)
 ------------------
