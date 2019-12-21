@@ -1,4 +1,4 @@
-from testapp.views import index
+from tests.testapp.views import index
 
 try:
     from django.urls import path
