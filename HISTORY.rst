@@ -1,6 +1,11 @@
 History
 =======
 
+* Updated to the latest set of features from Chrome. This adds 2 new features:
+  'document-access' and 'xr-spatial-tracking'. This also removes the 'speaker'
+  since it has now been
+  `removed from the w3c specification <https://github.com/w3c/webappsec-feature-policy/commit/18707d396e1d3f0be3de348fc432383cc8866e0b>`__.
+
 3.1.0 (2019-11-15)
 ------------------
 
