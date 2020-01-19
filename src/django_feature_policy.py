@@ -23,6 +23,7 @@ FEATURE_NAMES = {
     "ch-ua-platform",
     "ch-viewport-width",
     "ch-width",
+    "document-access",
     "document-domain",
     "document-write",
     "downloads-without-user-activation",
@@ -53,7 +54,6 @@ FEATURE_NAMES = {
     "presentation",
     "scripts",
     "serial",
-    "speaker",
     "sync-script",
     "sync-xhr",
     "top-navigation",
@@ -65,6 +65,7 @@ FEATURE_NAMES = {
     "vertical-scroll",
     "vr",
     "wake-lock",
+    "xr-spatial-tracking",
 }
 
 
