@@ -1,6 +1,9 @@
 History
 =======
 
+3.2.0 (2020-01-19)
+------------------
+
 * Updated to the latest set of features from Chrome. This adds 2 new features:
   'document-access' and 'xr-spatial-tracking'. This also removes the 'speaker'
   since it has now been
