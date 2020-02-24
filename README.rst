@@ -26,7 +26,7 @@ Install with **pip**:
 
 .. code-block:: sh
 
-    pip install django-feature-policy
+    python -m pip install django-feature-policy
 
 Then add the middleware, best after Django's ``SecurityMiddleware`` as it does
 similar addition of security headers that you'll want on every response:
