@@ -1,8 +1,8 @@
 django-feature-policy
 =====================
 
-.. image:: https://img.shields.io/travis/adamchainz/django-feature-policy/master.svg
-        :target: https://travis-ci.org/adamchainz/django-feature-policy
+.. image:: https://github.com/adamchainz/django-feature-policy/workflows/CI/badge.svg?branch=master
+        :target: https://github.com/adamchainz/django-feature-policy/actions?workflow=CI
 
 .. image:: https://img.shields.io/pypi/v/django-feature-policy.svg
         :target: https://pypi.python.org/pypi/django-feature-policy
