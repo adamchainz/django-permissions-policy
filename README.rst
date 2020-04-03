@@ -2,13 +2,13 @@ django-feature-policy
 =====================
 
 .. image:: https://github.com/adamchainz/django-feature-policy/workflows/CI/badge.svg?branch=master
-        :target: https://github.com/adamchainz/django-feature-policy/actions?workflow=CI
+   :target: https://github.com/adamchainz/django-feature-policy/actions?workflow=CI
 
 .. image:: https://img.shields.io/pypi/v/django-feature-policy.svg
-        :target: https://pypi.python.org/pypi/django-feature-policy
+   :target: https://pypi.python.org/pypi/django-feature-policy
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/python/black
+   :target: https://github.com/python/black
 
 Set the draft security HTTP header ``Feature-Policy`` on your Django app.
 
