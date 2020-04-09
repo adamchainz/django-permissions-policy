@@ -1,6 +1,9 @@
 History
 =======
 
+3.3.0 (2020-04-09)
+------------------
+
 * Drop Django 1.11 support. Only Django 2.0+ is supported now.
 * Updated to the latest set of features from Chrome 81. This adds
   'ch-ua-mobile', removes 'document-access', and 'vr', and renames
