@@ -1,12 +1,29 @@
 History
 =======
 
-* Add Django 3.1 support.
+* Updated to the latest set of features from Chrome 83.
+
+  New features:
+
+  - ``ch-ua-full-version``
+  - ``screen-wake-lock``
+
+  Removed features:
+
+  - ``font-display-late-swap``
+  - ``oversized-images``
+  - ``unoptimized-lossless-images``
+  - ``unoptimized-lossless-images-strict``
+  - ``unoptimized-lossy-images``
+  - ``unsized-media``
+  - ``wake-lock``
+
+* Added Django 3.1 support.
 
 3.3.0 (2020-04-09)
 ------------------
 
-* Drop Django 1.11 support. Only Django 2.0+ is supported now.
+* Dropped Django 1.11 support. Only Django 2.0+ is supported now.
 * Updated to the latest set of features from Chrome 81. This adds
   'ch-ua-mobile', removes 'document-access', and 'vr', and renames
   'downloads-without-user-activation' to 'downloads'.
