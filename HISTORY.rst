@@ -1,6 +1,9 @@
 History
 =======
 
+3.4.0 (2020-04-09)
+------------------
+
 * Updated to the latest set of features from Chrome 83.
 
   New features:
