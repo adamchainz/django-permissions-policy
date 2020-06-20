@@ -5,7 +5,7 @@ django-feature-policy
    :target: https://github.com/adamchainz/django-feature-policy/actions?workflow=CI
 
 .. image:: https://img.shields.io/pypi/v/django-feature-policy.svg
-   :target: https://pypi.python.org/pypi/django-feature-policy
+   :target: https://pypi.org/project/django-feature-policy/
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/python/black
