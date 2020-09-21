@@ -2,6 +2,7 @@ History
 =======
 
 * Drop Django 2.0 and 2.1 support.
+* Move license from ISC to MIT License.
 
 3.4.0 (2020-05-24)
 ------------------
