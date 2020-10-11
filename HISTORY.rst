@@ -1,6 +1,9 @@
 History
 =======
 
+3.5.0 (2020-10-11)
+------------------
+
 * Drop Django 2.0 and 2.1 support.
 * Move license from ISC to MIT License.
 * Update for the rename of the header from ``Feature-Policy`` to
@@ -37,7 +40,6 @@ History
 
   - ``speaker``
   - ``vr``
-
 
 3.4.0 (2020-05-24)
 ------------------
