@@ -3,6 +3,12 @@ History
 
 * Drop Django 2.0 and 2.1 support.
 * Move license from ISC to MIT License.
+* Update for the rename of the header from ``Feature-Policy`` to
+  ``Permissions-Policy``. This means the middleware has been renamed to
+  ``PermissionsPolicyMiddleware`` and the setting has been renamed to
+  ``PERMISSIONS_POLICY``. The old names are supported as aliases for backwards
+  compatibility. The middleware also sets both the old and new names for
+  compatibility with older browsers.
 
 3.4.0 (2020-05-24)
 ------------------
