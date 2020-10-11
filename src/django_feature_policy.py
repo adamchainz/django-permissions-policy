@@ -63,7 +63,7 @@ FEATURE_NAMES = {
 }
 
 
-class FeaturePolicyMiddleware:
+class PermissionsPolicyMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
         self.header_value  # Access at setup so ImproperlyConfigured can be raised
@@ -73,12 +73,15 @@ class FeaturePolicyMiddleware:
         response = self.get_response(request)
         value = self.header_value
         if value:
+            response["Permissions-Policy"] = value
             response["Feature-Policy"] = value
         return response
 
     @cached_property
     def header_value(self):
-        setting = getattr(settings, "FEATURE_POLICY", {})
+        setting = getattr(settings, "PERMISSIONS_POLICY", None)
+        if not setting:
+            setting = getattr(settings, "FEATURE_POLICY", {})
         pieces = []
         for feature, values in sorted(setting.items()):
             if feature not in FEATURE_NAMES:
@@ -98,8 +101,11 @@ class FeaturePolicyMiddleware:
         return "; ".join(pieces)
 
     def clear_header_value(self, setting, **kwargs):
-        if setting == "FEATURE_POLICY":
+        if setting in ("PERMISSIONS_POLICY", "FEATURE_POLICY"):
             try:
                 del self.header_value
             except AttributeError:
                 pass
+
+
+FeaturePolicyMiddleware = PermissionsPolicyMiddleware

@@ -10,7 +10,7 @@ django-feature-policy
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/python/black
 
-Set the draft security HTTP header ``Feature-Policy`` on your Django app.
+Set the draft security HTTP header ``Permissions-Policy`` (previously ``Feature-Policy``) on your Django app.
 
 Requirements
 ------------
@@ -43,19 +43,30 @@ similar addition of security headers that you'll want on every response:
     MIDDLEWARE = [
       ...
       'django.middleware.security.SecurityMiddleware',
-      'django_feature_policy.FeaturePolicyMiddleware',
+      'django_feature_policy.PermissionsPolicyMiddleware',
       ...
     ]
 
-By default no header will be set, configure the setting as below.
+The middleware will set the ``Permissions-Policy`` header, and also set it with
+the previous name ``Feature-Policy``, for backwards compatibility with older
+browsers.
+
+The header will not be set until you configure the setting to set at least one
+policy, as below.
+
+(For backwards compatibility, the middleware is also importable from the alias
+``FeaturePolicyMiddleware``.)
 
 Setting
 -------
 
-Change the ``FEATURE_POLICY`` setting to configure what ``Feature-Policy``
-header gets set.
+Change the ``PERMISSIONS_POLICY`` setting to configure the contents of the
+header.
 
-This should be a dictionary laid out with:
+(For backwards compatibility, the ``FEATURE_POLICY`` setting will also be read
+if ``PERMISSIONS_POLICY`` is not defined.)
+
+The setting should be a dictionary laid out with:
 
 * Keys as the names of browser features - a full list is available on the
   `W3 Spec repository`_. The `MDN article`_ is also worth reading.
