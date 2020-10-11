@@ -74,14 +74,12 @@ class PermissionsPolicyMiddleware:
         value = self.header_value
         if value:
             response["Permissions-Policy"] = value
-            response["Feature-Policy"] = value
+            response["Feature-Policy"] = self.old_header_value
         return response
 
     @cached_property
     def header_value(self):
-        setting = getattr(settings, "PERMISSIONS_POLICY", None)
-        if not setting:
-            setting = getattr(settings, "FEATURE_POLICY", {})
+        setting = self.get_setting()
         pieces = []
         for feature, values in sorted(setting.items()):
             if feature not in FEATURE_NAMES:
@@ -89,16 +87,46 @@ class PermissionsPolicyMiddleware:
             if isinstance(values, str):
                 values = (values,)
 
-            item = [feature]
+            item = []
             for value in values:
                 if value == "none":
-                    item.append("'none'")
-                elif value == "self":
-                    item.append("'self'")
-                else:
+                    # 'none' was previously supported as a special token for
+                    # Feature-Policy, now can be represented by the empty list.
+                    pass
+                elif value in ("self", "*"):
                     item.append(value)
+                else:
+                    item.append('"{}"'.format(value))
+            pieces.append(feature + "=(" + " ".join(item) + ")")
+        return ", ".join(pieces)
+
+    @cached_property
+    def old_header_value(self):
+        setting = self.get_setting()
+        pieces = []
+        for feature, values in sorted(setting.items()):
+            if isinstance(values, str):
+                values = (values,)
+
+            item = [feature]
+            if not values:
+                item.append("'none'")
+            else:
+                for value in values:
+                    if value == "none":
+                        item.append("'none'")
+                    elif value == "self":
+                        item.append("'self'")
+                    else:
+                        item.append(value)
             pieces.append(" ".join(item))
         return "; ".join(pieces)
+
+    def get_setting(self):
+        setting = getattr(settings, "PERMISSIONS_POLICY", None)
+        if not setting:
+            setting = getattr(settings, "FEATURE_POLICY", {})
+        return setting
 
     def clear_header_value(self, setting, **kwargs):
         if setting in ("PERMISSIONS_POLICY", "FEATURE_POLICY"):
