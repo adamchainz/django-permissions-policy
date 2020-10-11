@@ -4,9 +4,10 @@ from django.core.signals import setting_changed
 from django.dispatch import receiver
 from django.utils.functional import cached_property
 
-# Retrieved from Chrome document.featurePolicy.allowedFeatures()
-# with flag "Experimental Web Platform features" turned on
 FEATURE_NAMES = {
+    # Base and Chrome-only features
+    # Retrieved from Chrome document.featurePolicy.allowedFeatures()
+    # with flag "Experimental Web Platform features" turned on:
     "accelerometer",
     "ambient-light-sensor",
     "autoplay",
@@ -23,8 +24,12 @@ FEATURE_NAMES = {
     "ch-ua-mobile",
     "ch-ua-model",
     "ch-ua-platform",
+    "ch-ua-platform-version",
     "ch-viewport-width",
     "ch-width",
+    "clipboard-read",
+    "clipboard-write",
+    "cross-origin-isolated",
     "document-domain",
     "document-write",
     "downloads",
@@ -34,13 +39,11 @@ FEATURE_NAMES = {
     "focus-without-user-activation",
     "forms",
     "fullscreen",
+    "gamepad",
     "geolocation",
     "gyroscope",
     "hid",
     "idle-detection",
-    "layout-animations",
-    "lazyload",
-    "loading-frame-default-eager",
     "magnetometer",
     "microphone",
     "midi",
@@ -51,6 +54,7 @@ FEATURE_NAMES = {
     "pointer-lock",
     "popups",
     "presentation",
+    "publickey-credentials-get",
     "screen-wake-lock",
     "scripts",
     "serial",
@@ -60,6 +64,14 @@ FEATURE_NAMES = {
     "usb",
     "vertical-scroll",
     "xr-spatial-tracking",
+    # Firefox-only features.
+    # Retrieved from Firefox document.featurePolicy.allowedFeatures()
+    # with dom.security.featurePolicy.header.enabled preference set to true
+    # in about:config (plus a restart):
+    "display-capture",
+    "speaker",
+    "vr",
+    "web-share",
 }
 
 

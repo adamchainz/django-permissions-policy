@@ -9,6 +9,35 @@ History
   ``PERMISSIONS_POLICY``. The old names are supported as aliases for backwards
   compatibility. The middleware also sets both the old and new names for
   compatibility with older browsers.
+* Updated to the latest set of features from Chrome 86.
+
+  New features:
+
+  - ``ch-ua-platform-version``
+  - ``clipboard-read``
+  - ``clipboard-write``
+  - ``cross-origin-isolated``
+  - ``gamepad``
+  - ``publickey-credentials-get``
+
+  Removed features:
+
+  - ``layout-animations``
+  - ``lazyload``
+  - ``loading-frame-default-eager``
+* Added features from Firefox 81. This adds some unique features, and restores
+  some features that Chrome has removed.
+
+  New features:
+
+  - ``display-capture``
+  - ``web-share``
+
+  Restored features:
+
+  - ``speaker``
+  - ``vr``
+
 
 3.4.0 (2020-05-24)
 ------------------
