@@ -2,10 +2,10 @@
 django-feature-policy
 =====================
 
-.. image:: https://img.shields.io/github/workflow/status/adamchainz/django-feature-policy/CI/master?style=for-the-badge
+.. image:: https://img.shields.io/github/workflow/status/adamchainz/django-feature-policy/CI/main?style=for-the-badge
    :target: https://github.com/adamchainz/django-feature-policy/actions?workflow=CI
 
-.. image:: https://img.shields.io/coveralls/github/adamchainz/django-feature-policy/master?style=for-the-badge
+.. image:: https://img.shields.io/coveralls/github/adamchainz/django-feature-policy/main?style=for-the-badge
    :target: https://app.codecov.io/gh/adamchainz/django-feature-policy
 
 .. image:: https://img.shields.io/pypi/v/django-feature-policy.svg?style=for-the-badge
