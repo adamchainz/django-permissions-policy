@@ -2,6 +2,28 @@
 History
 =======
 
+* Updated to the latest set of features from Chrome 91 dev.
+
+  New features:
+
+  - ``conversion-measurement``
+  - ``interest-cohort``
+  - ``otp-credentials``
+
+  Removed features:
+
+  - ``document-write``
+  - ``downloads``
+  - ``forms``
+  - ``modals``
+  - ``orientatin-lock``
+  - ``pointer-lock``
+  - ``popups``
+  - ``presentation``
+  - ``scripts``
+  - ``sync-script``
+  - ``top-navigation``
+
 3.7.0 (2021-01-25)
 ------------------
 
