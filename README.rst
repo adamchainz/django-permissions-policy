@@ -55,9 +55,7 @@ similar addition of security headers that you'll want on every response:
       ...
     ]
 
-The middleware will set the ``Permissions-Policy`` header, and also set it with
-the previous name ``Feature-Policy``, for backwards compatibility with older
-browsers.
+The middleware will set the ``Permissions-Policy`` header.
 
 The header will not be set until you configure the setting to set at least one
 policy, as below.
@@ -95,10 +93,9 @@ instantiation time, or when processing a response. The current feature list is
 pulled from the JavaScript API with
 ``document.featurePolicy.allowedFeatures()`` on Chrome.
 
-For backwards compatibility with the old ``Feature-Policy`` header and
-configuration, the value ``'none'`` is supported in lists, but ignored - it's
-preferable to use the empty list instead. It doesn't make sense to specify
-``'none'`` alongside other values.
+For backwards compatibility with old configuration, the value ``'none'`` is
+supported in lists, but ignored - it's preferable to use the empty list
+instead. It doesn't make sense to specify ``'none'`` alongside other values.
 
 Examples
 ~~~~~~~~
