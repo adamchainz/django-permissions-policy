@@ -1,7 +1,7 @@
 import pytest
 from django.core.exceptions import ImproperlyConfigured
 
-import django_feature_policy
+import django_permissions_policy
 
 
 def test_index(client):
@@ -148,6 +148,6 @@ def test_other_setting_changing(client, settings):
 
 def test_middleware_alias():
     assert (
-        django_feature_policy.FeaturePolicyMiddleware
-        is django_feature_policy.PermissionsPolicyMiddleware
+        django_permissions_policy.FeaturePolicyMiddleware
+        is django_permissions_policy.PermissionsPolicyMiddleware
     )

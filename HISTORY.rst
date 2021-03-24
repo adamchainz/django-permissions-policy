@@ -2,6 +2,10 @@
 History
 =======
 
+* Rename the package from ``django-feature-policy`` to
+  ``django-permissions-policy`` and the module name from
+  ``django_feature_policy`` to ``django_permissions_policy`` accordingly.
+
 * Stop sending the ``Feature-Policy`` header. Chrome now logs warnings if it is
   sent alongside ``Permissions-Policy``.
 

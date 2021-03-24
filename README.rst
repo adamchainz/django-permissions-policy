@@ -1,15 +1,15 @@
-=====================
-django-feature-policy
-=====================
+=========================
+django-permissions-policy
+=========================
 
-.. image:: https://img.shields.io/github/workflow/status/adamchainz/django-feature-policy/CI/main?style=for-the-badge
-   :target: https://github.com/adamchainz/django-feature-policy/actions?workflow=CI
+.. image:: https://img.shields.io/github/workflow/status/adamchainz/django-permissions-policy/CI/main?style=for-the-badge
+   :target: https://github.com/adamchainz/django-permissions-policy/actions?workflow=CI
 
-.. image:: https://img.shields.io/coveralls/github/adamchainz/django-feature-policy/main?style=for-the-badge
-   :target: https://app.codecov.io/gh/adamchainz/django-feature-policy
+.. image:: https://img.shields.io/coveralls/github/adamchainz/django-permissions-policy/main?style=for-the-badge
+   :target: https://app.codecov.io/gh/adamchainz/django-permissions-policy
 
-.. image:: https://img.shields.io/pypi/v/django-feature-policy.svg?style=for-the-badge
-   :target: https://pypi.org/project/django-feature-policy/
+.. image:: https://img.shields.io/pypi/v/django-permissions-policy.svg?style=for-the-badge
+   :target: https://pypi.org/project/django-permissions-policy/
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge
    :target: https://github.com/psf/black
@@ -41,7 +41,7 @@ Install with **pip**:
 
 .. code-block:: sh
 
-    python -m pip install django-feature-policy
+    python -m pip install django-permissions-policy
 
 Then add the middleware, best after Django's ``SecurityMiddleware`` as it does
 similar addition of security headers that you'll want on every response:
@@ -51,7 +51,7 @@ similar addition of security headers that you'll want on every response:
     MIDDLEWARE = [
       ...
       'django.middleware.security.SecurityMiddleware',
-      'django_feature_policy.PermissionsPolicyMiddleware',
+      'django_permissions_policy.PermissionsPolicyMiddleware',
       ...
     ]
 
