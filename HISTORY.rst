@@ -2,6 +2,9 @@
 History
 =======
 
+4.0.0 (2021-03-24)
+------------------
+
 * Rename the package from ``django-feature-policy`` to
   ``django-permissions-policy`` and the module name from
   ``django_feature_policy`` to ``django_permissions_policy`` accordingly.
