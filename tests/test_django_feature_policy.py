@@ -15,7 +15,6 @@ def test_no_setting(client):
     resp = client.get("/")
 
     assert "Permissions-Policy" not in resp
-    assert "Feature-Policy" not in resp
 
 
 def test_empty_setting(client, settings):
@@ -23,7 +22,6 @@ def test_empty_setting(client, settings):
     resp = client.get("/")
 
     assert "Permissions-Policy" not in resp
-    assert "Feature-Policy" not in resp
 
 
 def test_empty_setting_old_alias(client, settings):
@@ -31,7 +29,6 @@ def test_empty_setting_old_alias(client, settings):
     resp = client.get("/")
 
     assert "Permissions-Policy" not in resp
-    assert "Feature-Policy" not in resp
 
 
 def test_anyone_can_geolocate(client, settings):
@@ -40,7 +37,6 @@ def test_anyone_can_geolocate(client, settings):
     resp = client.get("/")
 
     assert resp["Permissions-Policy"] == "geolocation=(*)"
-    assert resp["Feature-Policy"] == "geolocation *"
 
 
 def test_anyone_can_geolocate_old_alias(client, settings):
@@ -49,7 +45,6 @@ def test_anyone_can_geolocate_old_alias(client, settings):
     resp = client.get("/")
 
     assert resp["Permissions-Policy"] == "geolocation=(*)"
-    assert resp["Feature-Policy"] == "geolocation *"
 
 
 def test_anyone_can_geolocate_list(client, settings):
@@ -58,7 +53,6 @@ def test_anyone_can_geolocate_list(client, settings):
     resp = client.get("/")
 
     assert resp["Permissions-Policy"] == "geolocation=(*)"
-    assert resp["Feature-Policy"] == "geolocation *"
 
 
 def test_no_one_can_geolocate(client, settings):
@@ -67,7 +61,6 @@ def test_no_one_can_geolocate(client, settings):
     resp = client.get("/")
 
     assert resp["Permissions-Policy"] == "geolocation=()"
-    assert resp["Feature-Policy"] == "geolocation 'none'"
 
 
 def test_no_one_can_geolocate_old_none_value(client, settings):
@@ -76,7 +69,6 @@ def test_no_one_can_geolocate_old_none_value(client, settings):
     resp = client.get("/")
 
     assert resp["Permissions-Policy"] == "geolocation=()"
-    assert resp["Feature-Policy"] == "geolocation 'none'"
 
 
 def test_self_can_geolocate(client, settings):
@@ -85,7 +77,6 @@ def test_self_can_geolocate(client, settings):
     resp = client.get("/")
 
     assert resp["Permissions-Policy"] == "geolocation=(self)"
-    assert resp["Feature-Policy"] == "geolocation 'self'"
 
 
 def test_example_com_can_geolocate(client, settings):
@@ -94,7 +85,6 @@ def test_example_com_can_geolocate(client, settings):
     resp = client.get("/")
 
     assert resp["Permissions-Policy"] == 'geolocation=("https://example.com")'
-    assert resp["Feature-Policy"] == "geolocation https://example.com"
 
 
 def test_multiple_allowed(client, settings):
@@ -103,7 +93,6 @@ def test_multiple_allowed(client, settings):
     resp = client.get("/")
 
     assert resp["Permissions-Policy"] == 'autoplay=(self "https://example.com")'
-    assert resp["Feature-Policy"] == "autoplay 'self' https://example.com"
 
 
 def test_multiple_features(client, settings):
@@ -117,10 +106,6 @@ def test_multiple_features(client, settings):
     assert (
         resp["Permissions-Policy"]
         == 'accelerometer=(self), geolocation=(self "https://example.com")'
-    )
-    assert (
-        resp["Feature-Policy"]
-        == "accelerometer 'self'; geolocation 'self' https://example.com"
     )
 
 
@@ -139,7 +124,6 @@ def test_setting_changing(client, settings):
     resp = client.get("/")
 
     assert resp["Permissions-Policy"] == "geolocation=(self)"
-    assert resp["Feature-Policy"] == "geolocation 'self'"
 
 
 def test_setting_changing_old_alias(client, settings):
@@ -150,7 +134,6 @@ def test_setting_changing_old_alias(client, settings):
     resp = client.get("/")
 
     assert resp["Permissions-Policy"] == "geolocation=(self)"
-    assert resp["Feature-Policy"] == "geolocation 'self'"
 
 
 def test_other_setting_changing(client, settings):
@@ -161,7 +144,6 @@ def test_other_setting_changing(client, settings):
     resp = client.get("/")
 
     assert resp["Permissions-Policy"] == "geolocation=(self)"
-    assert resp["Feature-Policy"] == "geolocation 'self'"
 
 
 def test_middleware_alias():

@@ -78,7 +78,6 @@ class PermissionsPolicyMiddleware:
         value = self.header_value
         if value:
             response["Permissions-Policy"] = value
-            response["Feature-Policy"] = self.old_header_value
         return response
 
     @cached_property
@@ -103,28 +102,6 @@ class PermissionsPolicyMiddleware:
                     item.append('"{}"'.format(value))
             pieces.append(feature + "=(" + " ".join(item) + ")")
         return ", ".join(pieces)
-
-    @cached_property
-    def old_header_value(self):
-        setting = self.get_setting()
-        pieces = []
-        for feature, values in sorted(setting.items()):
-            if isinstance(values, str):
-                values = (values,)
-
-            item = [feature]
-            if not values:
-                item.append("'none'")
-            else:
-                for value in values:
-                    if value == "none":
-                        item.append("'none'")
-                    elif value == "self":
-                        item.append("'self'")
-                    else:
-                        item.append(value)
-            pieces.append(" ".join(item))
-        return "; ".join(pieces)
 
     def get_setting(self):
         setting = getattr(settings, "PERMISSIONS_POLICY", None)

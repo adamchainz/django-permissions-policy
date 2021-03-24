@@ -2,6 +2,9 @@
 History
 =======
 
+* Stop sending the ``Feature-Policy`` header. Chrome now logs warnings if it is
+  sent alongside ``Permissions-Policy``.
+
 * Stop distributing tests to reduce package size. Tests are not intended to be
   run outside of the tox setup in the repository. Repackagers can use GitHub's
   tarballs per tag.
