@@ -69,9 +69,6 @@ Setting
 Change the ``PERMISSIONS_POLICY`` setting to configure the contents of the
 header.
 
-(For backwards compatibility, the ``FEATURE_POLICY`` setting will also be read
-if ``PERMISSIONS_POLICY`` is not defined.)
-
 The setting should be a dictionary laid out with:
 
 * Keys as the names of browser features - a full list is available on the

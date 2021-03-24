@@ -9,6 +9,9 @@ History
 * Stop sending the ``Feature-Policy`` header. Chrome now logs warnings if it is
   sent alongside ``Permissions-Policy``.
 
+* Remove support for the legacy setting name ``FEATURE_POLICY`` and the old
+  middleware alias ``FeaturePolicyMiddleware``.
+
 * Stop distributing tests to reduce package size. Tests are not intended to be
   run outside of the tox setup in the repository. Repackagers can use GitHub's
   tarballs per tag.

@@ -82,7 +82,7 @@ class PermissionsPolicyMiddleware:
 
     @cached_property
     def header_value(self):
-        setting = self.get_setting()
+        setting = getattr(settings, "PERMISSIONS_POLICY", {})
         pieces = []
         for feature, values in sorted(setting.items()):
             if feature not in FEATURE_NAMES:
@@ -103,18 +103,9 @@ class PermissionsPolicyMiddleware:
             pieces.append(feature + "=(" + " ".join(item) + ")")
         return ", ".join(pieces)
 
-    def get_setting(self):
-        setting = getattr(settings, "PERMISSIONS_POLICY", None)
-        if not setting:
-            setting = getattr(settings, "FEATURE_POLICY", {})
-        return setting
-
     def clear_header_value(self, setting, **kwargs):
-        if setting in ("PERMISSIONS_POLICY", "FEATURE_POLICY"):
+        if setting == "PERMISSIONS_POLICY":
             try:
                 del self.header_value
             except AttributeError:
                 pass
-
-
-FeaturePolicyMiddleware = PermissionsPolicyMiddleware

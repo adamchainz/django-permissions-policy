@@ -1,8 +1,6 @@
 import pytest
 from django.core.exceptions import ImproperlyConfigured
 
-import django_permissions_policy
-
 
 def test_index(client):
     resp = client.get("/")
@@ -22,29 +20,6 @@ def test_empty_setting(client, settings):
     resp = client.get("/")
 
     assert "Permissions-Policy" not in resp
-
-
-def test_empty_setting_old_alias(client, settings):
-    settings.FEATURE_POLICY = {}
-    resp = client.get("/")
-
-    assert "Permissions-Policy" not in resp
-
-
-def test_anyone_can_geolocate(client, settings):
-    settings.PERMISSIONS_POLICY = {"geolocation": "*"}
-
-    resp = client.get("/")
-
-    assert resp["Permissions-Policy"] == "geolocation=(*)"
-
-
-def test_anyone_can_geolocate_old_alias(client, settings):
-    settings.FEATURE_POLICY = {"geolocation": "*"}
-
-    resp = client.get("/")
-
-    assert resp["Permissions-Policy"] == "geolocation=(*)"
 
 
 def test_anyone_can_geolocate_list(client, settings):
@@ -126,16 +101,6 @@ def test_setting_changing(client, settings):
     assert resp["Permissions-Policy"] == "geolocation=(self)"
 
 
-def test_setting_changing_old_alias(client, settings):
-    settings.FEATURE_POLICY = {}
-    client.get("/")  # Forces middleware instantiation
-    settings.FEATURE_POLICY = {"geolocation": "self"}
-
-    resp = client.get("/")
-
-    assert resp["Permissions-Policy"] == "geolocation=(self)"
-
-
 def test_other_setting_changing(client, settings):
     settings.PERMISSIONS_POLICY = {"geolocation": "self"}
     client.get("/")  # Forces middleware instantiation
@@ -144,10 +109,3 @@ def test_other_setting_changing(client, settings):
     resp = client.get("/")
 
     assert resp["Permissions-Policy"] == "geolocation=(self)"
-
-
-def test_middleware_alias():
-    assert (
-        django_permissions_policy.FeaturePolicyMiddleware
-        is django_permissions_policy.PermissionsPolicyMiddleware
-    )
