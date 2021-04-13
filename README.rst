@@ -49,10 +49,10 @@ similar addition of security headers that you'll want on every response:
 .. code-block:: python
 
     MIDDLEWARE = [
-      ...
+      ...,
       'django.middleware.security.SecurityMiddleware',
       'django_permissions_policy.PermissionsPolicyMiddleware',
-      ...
+      ...,
     ]
 
 The middleware will set the ``Permissions-Policy`` header.
