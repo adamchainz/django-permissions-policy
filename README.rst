@@ -5,7 +5,7 @@ django-permissions-policy
 .. image:: https://img.shields.io/github/workflow/status/adamchainz/django-permissions-policy/CI/main?style=for-the-badge
    :target: https://github.com/adamchainz/django-permissions-policy/actions?workflow=CI
 
-.. image:: https://img.shields.io/coveralls/github/adamchainz/django-permissions-policy/main?style=for-the-badge
+.. image:: https://img.shields.io/codecov/c/github/adamchainz/django-permissions-policy/main?style=for-the-badge
    :target: https://app.codecov.io/gh/adamchainz/django-permissions-policy
 
 .. image:: https://img.shields.io/pypi/v/django-permissions-policy.svg?style=for-the-badge
