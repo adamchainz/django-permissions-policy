@@ -37,14 +37,15 @@ Check out my book `Speed Up Your Django Tests <https://gumroad.com/l/suydt>`__ w
 Installation
 ------------
 
-Install with **pip**:
+1. Install with **pip**:
 
 .. code-block:: sh
 
     python -m pip install django-permissions-policy
 
-Then add the middleware, best after Django's ``SecurityMiddleware`` as it does
-similar addition of security headers that you'll want on every response:
+2. Add the middleware in your ``MIDDLEWARE`` setting. It’s best to add it
+after Django's ``SecurityMiddleware``, so it adds the header at the same point
+in your stack:
 
 .. code-block:: python
 
@@ -55,13 +56,31 @@ similar addition of security headers that you'll want on every response:
       ...,
     ]
 
-The middleware will set the ``Permissions-Policy`` header.
+3. Add the ``PERMISSIONS_POLICY`` setting to your settings, naming at least one
+   feature. Here’s an example that sets a strict policy to disable many
+   potentially privacy-invading and annoying features for all scripts:
 
-The header will not be set until you configure the setting to set at least one
-policy, as below.
+   .. code-block:: python
 
-(For backwards compatibility, the middleware is also importable from the alias
-``FeaturePolicyMiddleware``.)
+       PERMISSIONS_POLICY = {
+           "accelerometer": [],
+           "ambient-light-sensor": [],
+           "autoplay": [],
+           "camera": [],
+           "document-domain": [],
+           "encrypted-media": [],
+           "fullscreen": [],
+           "geolocation": [],
+           "gyroscope": [],
+           "interest-cohort": [],
+           "magnetometer": [],
+           "microphone": [],
+           "midi": [],
+           "payment": [],
+           "usb": [],
+       }
+
+   See below for more information on the setting.
 
 Setting
 -------
