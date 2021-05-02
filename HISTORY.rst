@@ -2,6 +2,8 @@
 History
 =======
 
+* Improve setup instructions.
+
 4.0.0 (2021-03-24)
 ------------------
 
