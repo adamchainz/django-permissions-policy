@@ -67,6 +67,7 @@ in your stack:
            "ambient-light-sensor": [],
            "autoplay": [],
            "camera": [],
+           "display-capture": [],
            "document-domain": [],
            "encrypted-media": [],
            "fullscreen": [],
