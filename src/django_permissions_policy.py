@@ -10,6 +10,7 @@ FEATURE_NAMES = {
     # with flag "Experimental Web Platform features" turned on:
     "accelerometer",
     "ambient-light-sensor",
+    "attribution-reporting",
     "autoplay",
     "camera",
     "ch-device-memory",
@@ -17,6 +18,7 @@ FEATURE_NAMES = {
     "ch-dpr",
     "ch-ect",
     "ch-lang",
+    "ch-prefers-color-scheme",
     "ch-rtt",
     "ch-ua",
     "ch-ua-arch",
@@ -29,7 +31,6 @@ FEATURE_NAMES = {
     "ch-width",
     "clipboard-read",
     "clipboard-write",
-    "conversion-measurement",
     "cross-origin-isolated",
     "display-capture",
     "document-domain",
@@ -53,9 +54,11 @@ FEATURE_NAMES = {
     "publickey-credentials-get",
     "screen-wake-lock",
     "serial",
+    "shared-autofill",
     "sync-xhr",
     "usb",
     "vertical-scroll",
+    "window-placement",
     "xr-spatial-tracking",
     # Firefox-only features.
     # Retrieved from Firefox document.featurePolicy.allowedFeatures()
