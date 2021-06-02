@@ -2,6 +2,9 @@
 History
 =======
 
+4.1.0 (2021-06-02)
+------------------
+
 * Updated to the latest set of features from Chrome 92 dev.
 
   New features:
