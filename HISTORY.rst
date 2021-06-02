@@ -2,6 +2,19 @@
 History
 =======
 
+* Updated to the latest set of features from Chrome 92 dev.
+
+  New features:
+
+  - ``attribution-reporting``
+  - ``ch-prefers-color-scheme``
+  - ``shared-autofill``
+  - ``window-placement``
+
+  Removed features:
+
+  - ``conversion-tracking``
+
 4.0.1 (2021-05-02)
 ------------------
 
