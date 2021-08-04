@@ -50,10 +50,10 @@ in your stack:
 .. code-block:: python
 
     MIDDLEWARE = [
-      ...,
-      'django.middleware.security.SecurityMiddleware',
-      'django_permissions_policy.PermissionsPolicyMiddleware',
-      ...,
+        ...,
+        "django.middleware.security.SecurityMiddleware",
+        "django_permissions_policy.PermissionsPolicyMiddleware",
+        ...,
     ]
 
 3. Add the ``PERMISSIONS_POLICY`` setting to your settings, naming at least one
