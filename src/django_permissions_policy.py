@@ -89,7 +89,7 @@ class PermissionsPolicyMiddleware:
         pieces = []
         for feature, values in sorted(setting.items()):
             if feature not in FEATURE_NAMES:
-                raise ImproperlyConfigured("Unknown feature {}".format(feature))
+                raise ImproperlyConfigured(f"Unknown feature {feature}")
             if isinstance(values, str):
                 values = (values,)
 
@@ -102,7 +102,7 @@ class PermissionsPolicyMiddleware:
                 elif value in ("self", "*"):
                     item.append(value)
                 else:
-                    item.append('"{}"'.format(value))
+                    item.append(f'"{value}"')
             pieces.append(feature + "=(" + " ".join(item) + ")")
         return ", ".join(pieces)
 
