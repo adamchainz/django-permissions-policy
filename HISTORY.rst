@@ -2,6 +2,13 @@
 History
 =======
 
+* Updated to the latest set of features from Chrome 94 dev.
+
+  New features:
+
+  - ``ch-ua-bitness``
+  - ``ch-ua-reduced``
+
 4.1.0 (2021-06-02)
 ------------------
 
@@ -57,7 +64,7 @@ History
   - ``downloads``
   - ``forms``
   - ``modals``
-  - ``orientatin-lock``
+  - ``orientation-lock``
   - ``pointer-lock``
   - ``popups``
   - ``presentation``
