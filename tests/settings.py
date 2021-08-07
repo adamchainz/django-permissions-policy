@@ -1,14 +1,19 @@
+from typing import Any, Dict, List
+
 DEBUG = False
 
 SECRET_KEY = "not-secret"
 
 DATABASES = {
-    "default": {"ENGINE": "django.db.backends.sqlite3", "LOCATION": ":memory:"}
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "LOCATION": ":memory:",
+    }
 }
 
 ALLOWED_HOSTS = ["*"]
 
-INSTALLED_APPS = []
+INSTALLED_APPS: List[str] = []
 
 MIDDLEWARE = [
     "django_permissions_policy.PermissionsPolicyMiddleware",
@@ -19,4 +24,4 @@ ROOT_URLCONF = "tests.testapp.urls"
 
 STATIC_URL = "/static/"
 
-TEMPLATES = []
+TEMPLATES: List[Dict[str, Any]] = []

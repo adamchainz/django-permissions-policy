@@ -9,6 +9,8 @@ History
   - ``ch-ua-bitness``
   - ``ch-ua-reduced``
 
+* Add type hints.
+
 4.1.0 (2021-06-02)
 ------------------
 
