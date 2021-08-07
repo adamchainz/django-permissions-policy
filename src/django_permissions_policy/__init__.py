@@ -1,7 +1,10 @@
+from typing import Callable, Dict, List, Tuple, Union
+
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.signals import setting_changed
 from django.dispatch import receiver
+from django.http import HttpRequest, HttpResponse
 from django.utils.functional import cached_property
 
 FEATURE_NAMES = {
@@ -73,12 +76,12 @@ FEATURE_NAMES = {
 
 
 class PermissionsPolicyMiddleware:
-    def __init__(self, get_response):
+    def __init__(self, get_response: Callable[[HttpRequest], HttpResponse]) -> None:
         self.get_response = get_response
         self.header_value  # Access at setup so ImproperlyConfigured can be raised
         receiver(setting_changed)(self.clear_header_value)
 
-    def __call__(self, request):
+    def __call__(self, request: HttpRequest) -> HttpResponse:
         response = self.get_response(request)
         value = self.header_value
         if value:
@@ -86,8 +89,10 @@ class PermissionsPolicyMiddleware:
         return response
 
     @cached_property
-    def header_value(self):
-        setting = getattr(settings, "PERMISSIONS_POLICY", {})
+    def header_value(self) -> str:
+        setting: Dict[str, Union[str, List[str], Tuple[str]]] = getattr(
+            settings, "PERMISSIONS_POLICY", {}
+        )
         pieces = []
         for feature, values in sorted(setting.items()):
             if feature not in FEATURE_NAMES:
@@ -108,7 +113,7 @@ class PermissionsPolicyMiddleware:
             pieces.append(feature + "=(" + " ".join(item) + ")")
         return ", ".join(pieces)
 
-    def clear_header_value(self, setting, **kwargs):
+    def clear_header_value(self, setting: str, **kwargs: object) -> None:
         if setting == "PERMISSIONS_POLICY":
             try:
                 del self.header_value
