@@ -25,3 +25,5 @@ ROOT_URLCONF = "tests.testapp.urls"
 STATIC_URL = "/static/"
 
 TEMPLATES: List[Dict[str, Any]] = []
+
+USE_TZ = True
