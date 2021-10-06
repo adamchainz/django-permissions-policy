@@ -2,6 +2,20 @@
 History
 =======
 
+* Updated to the latest set of features from Chrome 96 dev and Firefox 93.
+
+  New features:
+
+  - ``ch-viewport-height``
+  - ``speaker-selection``
+
+  Removed features:
+
+  - ``ch-lang``
+  - ``ch-ua-reduced``
+  - ``shared-autofill``
+  - ``speaker``
+
 4.4.0 (2021-10-05)
 ------------------
 
