@@ -2,6 +2,9 @@
 History
 =======
 
+4.5.0 (2021-10-06)
+------------------
+
 * Updated to the latest set of features from Chrome 96 dev and Firefox 93.
 
   New features:
