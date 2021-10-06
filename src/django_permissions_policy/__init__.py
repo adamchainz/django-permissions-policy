@@ -20,7 +20,6 @@ FEATURE_NAMES = {
     "ch-downlink",
     "ch-dpr",
     "ch-ect",
-    "ch-lang",
     "ch-prefers-color-scheme",
     "ch-rtt",
     "ch-ua",
@@ -31,7 +30,7 @@ FEATURE_NAMES = {
     "ch-ua-model",
     "ch-ua-platform",
     "ch-ua-platform-version",
-    "ch-ua-reduced",
+    "ch-viewport-height",
     "ch-viewport-width",
     "ch-width",
     "clipboard-read",
@@ -59,7 +58,6 @@ FEATURE_NAMES = {
     "publickey-credentials-get",
     "screen-wake-lock",
     "serial",
-    "shared-autofill",
     "sync-xhr",
     "usb",
     "vertical-scroll",
@@ -69,7 +67,7 @@ FEATURE_NAMES = {
     # Retrieved from Firefox document.featurePolicy.allowedFeatures()
     # with dom.security.featurePolicy.header.enabled preference set to true
     # in about:config (plus a restart):
-    "speaker",
+    "speaker-selection",
     "vr",
     "web-share",
 }
