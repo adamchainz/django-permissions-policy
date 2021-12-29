@@ -2,6 +2,13 @@
 History
 =======
 
+* Updated to the latest set of features from Chrome 98 dev.
+
+  New features:
+
+  - ``ch-ua-full-version-list``
+  - ``keyboard-map``
+
 4.5.0 (2021-10-06)
 ------------------
 
