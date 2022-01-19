@@ -1,4 +1,6 @@
-from typing import Any, Dict, List
+from __future__ import annotations
+
+from typing import Any
 
 DEBUG = False
 
@@ -13,7 +15,7 @@ DATABASES = {
 
 ALLOWED_HOSTS = ["*"]
 
-INSTALLED_APPS: List[str] = []
+INSTALLED_APPS: list[str] = []
 
 MIDDLEWARE = [
     "django_permissions_policy.PermissionsPolicyMiddleware",
@@ -24,6 +26,6 @@ ROOT_URLCONF = "tests.testapp.urls"
 
 STATIC_URL = "/static/"
 
-TEMPLATES: List[Dict[str, Any]] = []
+TEMPLATES: list[dict[str, Any]] = []
 
 USE_TZ = True
