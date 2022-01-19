@@ -1,4 +1,6 @@
-from typing import Callable, Dict, List, Tuple, Union
+from __future__ import annotations
+
+from typing import Callable
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -90,7 +92,7 @@ class PermissionsPolicyMiddleware:
 
     @cached_property
     def header_value(self) -> str:
-        setting: Dict[str, Union[str, List[str], Tuple[str]]] = getattr(
+        setting: dict[str, str | list[str] | tuple[str]] = getattr(
             settings, "PERMISSIONS_POLICY", {}
         )
         pieces = []
