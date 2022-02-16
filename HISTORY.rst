@@ -2,6 +2,16 @@
 History
 =======
 
+* Updated to the latest set of features from Chrome 100 dev.
+
+  New features:
+
+  - ``ch-ua-wow64``
+
+  Removed features:
+
+  - ``interest-cohort``
+
 4.7.0 (2022-01-10)
 ------------------
 
