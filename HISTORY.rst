@@ -2,6 +2,12 @@
 History
 =======
 
+* Updated to the latest set of features from Chrome 100 dev.
+
+  New features:
+
+  - ``ch-partitioned-cookies``
+
 4.8.0 (2022-02-16)
 ------------------
 

@@ -22,6 +22,7 @@ FEATURE_NAMES = {
     "ch-downlink",
     "ch-dpr",
     "ch-ect",
+    "ch-partitioned-cookies",
     "ch-prefers-color-scheme",
     "ch-rtt",
     "ch-ua",
