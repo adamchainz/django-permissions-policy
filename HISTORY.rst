@@ -2,6 +2,9 @@
 History
 =======
 
+4.9.0 (2022-03-25)
+------------------
+
 * Updated to the latest set of features from Chrome 100 dev.
 
   New features:
