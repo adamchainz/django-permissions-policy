@@ -9,7 +9,7 @@ from django.dispatch import receiver
 from django.http import HttpRequest, HttpResponse
 from django.utils.functional import cached_property
 
-FEATURE_NAMES: set[str] = {
+_FEATURE_NAMES: set[str] = {
     # Base and Chrome-only features
     # Retrieved from Chrome document.featurePolicy.allowedFeatures()
     # with flag "Experimental Web Platform features" turned on:
@@ -98,7 +98,7 @@ class PermissionsPolicyMiddleware:
         )
         pieces = []
         for feature, values in sorted(setting.items()):
-            if feature not in FEATURE_NAMES:
+            if feature not in _FEATURE_NAMES:
                 raise ImproperlyConfigured(f"Unknown feature {feature}")
             if isinstance(values, str):
                 values = (values,)
