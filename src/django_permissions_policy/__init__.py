@@ -9,7 +9,7 @@ from django.dispatch import receiver
 from django.http import HttpRequest, HttpResponse
 from django.utils.functional import cached_property
 
-FEATURE_NAMES = {
+FEATURE_NAMES: set[str] = {
     # Base and Chrome-only features
     # Retrieved from Chrome document.featurePolicy.allowedFeatures()
     # with flag "Experimental Web Platform features" turned on:
