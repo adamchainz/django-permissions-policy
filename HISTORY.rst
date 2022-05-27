@@ -2,6 +2,14 @@
 History
 =======
 
+* Updated to the latest set of features from Chrome 104 dev.
+
+  New features:
+
+  - ``bluetooth``
+  - ``ch-save-data``
+  - ``local-fonts``
+
 4.10.0 (2022-05-10)
 -------------------
 
