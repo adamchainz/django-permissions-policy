@@ -104,10 +104,10 @@ The setting should be a dictionary laid out with:
 .. _W3 Spec repository: https://github.com/w3c/webappsec-permissions-policy/blob/master/features.md
 .. _MDN article: https://developer.mozilla.org/en-US/docs/Web/HTTP/Feature_Policy#Browser_compatibility
 
-If the keys or values are invalid, ``ImproperlyConfigured`` will be raised at
-instantiation time, or when processing a response. The current feature list is
-pulled from the JavaScript API with
-``document.featurePolicy.allowedFeatures()`` on Chrome.
+If the keys or values are invalid, ``ImproperlyConfigured`` will be raised at instantiation time, or when processing a response.
+The current feature list is pulled from the JavaScript API with ``document.featurePolicy.allowedFeatures()`` on Chrome and Firefox.
+Browsers don’t always recognize all features, depending on the version and configuration.
+You may see warnings in the console for unavailable features in the header - these are normally safe to ignore, since django-permissions-policy already validates that you don’t have completely unknown names.
 
 For backwards compatibility with old configuration, the value ``'none'`` is
 supported in lists, but ignored - it's preferable to use the empty list
