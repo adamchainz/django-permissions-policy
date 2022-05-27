@@ -10,6 +10,10 @@ History
   - ``ch-save-data``
   - ``local-fonts``
 
+* Restore ``interest-cohort`` feature and recommend disabling it in README.
+  The original API, FLoC, was removed from Chrome, but there’s a replacement proposal `The Topics API <https://github.com/patcg-individual-drafts/topics>`__.
+  The proposal states that the ``interest-cohort`` feature will be recognized to disable it.
+
 4.10.0 (2022-05-10)
 -------------------
 

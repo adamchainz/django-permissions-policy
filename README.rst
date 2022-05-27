@@ -73,6 +73,7 @@ in your stack:
            "fullscreen": [],
            "geolocation": [],
            "gyroscope": [],
+           "interest-cohort": [],
            "magnetometer": [],
            "microphone": [],
            "midi": [],
