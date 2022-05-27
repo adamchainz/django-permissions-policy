@@ -71,6 +71,11 @@ _FEATURE_NAMES: set[str] = {
     "vertical-scroll",
     "window-placement",
     "xr-spatial-tracking",
+    # The 'interest-cohort' feature was removed from Chrome when FLoC was
+    # removed. But the new replacement proposal, "The Topics API", says that
+    # Chrome will respect this feature name to disable it:
+    # https://github.com/patcg-individual-drafts/topics
+    "interest-cohort",
     # Firefox-only features.
     # Retrieved from Firefox document.featurePolicy.allowedFeatures()
     # with dom.security.featurePolicy.header.enabled preference set to true
