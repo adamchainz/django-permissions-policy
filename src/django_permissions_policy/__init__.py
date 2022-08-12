@@ -130,7 +130,7 @@ class PermissionsPolicyMiddleware:
         assert not isinstance(result, HttpResponseBase)  # type narrow
         response = await result
         value = self.header_value
-        if value:
+        if value:  # pragma: no branch
             response["Permissions-Policy"] = value
         return response
 
