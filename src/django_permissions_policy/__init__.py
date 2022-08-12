@@ -1,12 +1,14 @@
 from __future__ import annotations
 
-from typing import Callable
+import asyncio
+from typing import Awaitable, Callable
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.signals import setting_changed
 from django.dispatch import receiver
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
+from django.http.response import HttpResponseBase
 from django.utils.functional import cached_property
 
 _FEATURE_NAMES: set[str] = {
@@ -87,13 +89,46 @@ _FEATURE_NAMES: set[str] = {
 
 
 class PermissionsPolicyMiddleware:
-    def __init__(self, get_response: Callable[[HttpRequest], HttpResponse]) -> None:
+    sync_capable = True
+    async_capable = True
+
+    def __init__(
+        self,
+        get_response: (
+            Callable[[HttpRequest], HttpResponseBase]
+            | Callable[[HttpRequest], Awaitable[HttpResponseBase]]
+        ),
+    ) -> None:
         self.get_response = get_response
+
+        if asyncio.iscoroutinefunction(self.get_response):
+            # Mark the class as async-capable, but do the actual switch
+            # inside __call__ to avoid swapping out dunder methods
+            self._is_coroutine = (
+                asyncio.coroutines._is_coroutine  # type: ignore [attr-defined]
+            )
+        else:
+            self._is_coroutine = None
+
         self.header_value  # Access at setup so ImproperlyConfigured can be raised
         receiver(setting_changed)(self.clear_header_value)
 
-    def __call__(self, request: HttpRequest) -> HttpResponse:
+    def __call__(
+        self, request: HttpRequest
+    ) -> HttpResponseBase | Awaitable[HttpResponseBase]:
+        if self._is_coroutine:
+            return self.__acall__(request)
         response = self.get_response(request)
+        assert isinstance(response, HttpResponseBase)  # type narrow
+        value = self.header_value
+        if value:
+            response["Permissions-Policy"] = value
+        return response
+
+    async def __acall__(self, request: HttpRequest) -> HttpResponseBase:
+        result = self.get_response(request)
+        assert not isinstance(result, HttpResponseBase)  # type narrow
+        response = await result
         value = self.header_value
         if value:
             response["Permissions-Policy"] = value
