@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Awaitable, Callable
+from typing import Awaitable
+from typing import Callable
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
