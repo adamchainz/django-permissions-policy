@@ -23,17 +23,13 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
     def test_no_setting(self):
         resp = self.client.get("/")
 
-        # django-stubs missing method
-        # https://github.com/typeddjango/django-stubs/pull/1099
-        assert "Permissions-Policy" not in resp  # type: ignore [operator]
+        assert "Permissions-Policy" not in resp
 
     def test_empty_setting(self):
         with override_settings(PERMISSIONS_POLICY={}):
             resp = self.client.get("/")
 
-        # django-stubs missing method
-        # https://github.com/typeddjango/django-stubs/pull/1099
-        assert "Permissions-Policy" not in resp  # type: ignore [operator]
+        assert "Permissions-Policy" not in resp
 
     def test_anyone_can_geolocate_list(self):
         with override_settings(PERMISSIONS_POLICY={"geolocation": ["*"]}):
