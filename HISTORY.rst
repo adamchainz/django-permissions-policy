@@ -2,6 +2,19 @@
 History
 =======
 
+* Updated to the latest set of features from Chrome 109 dev.
+
+  New features:
+
+  - ``ch-prefers-reduced-motion``
+  - ``compute-pressure``
+  - ``direct-sockets``
+  - ``unload``
+
+  Removed features:
+
+  - ``ch-partitioned-cookies``
+
 4.13.0 (2022-08-12)
 -------------------
 
