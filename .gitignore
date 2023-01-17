@@ -1,8 +1,7 @@
-*.egg-info
-*.py[cod]
-.coverage
-.coverage*
-.tox
-build
-dist
-sdist
+*.egg-info/
+*.pyc
+/.coverage
+/.coverage.*
+/.tox
+/build/
+/dist/
