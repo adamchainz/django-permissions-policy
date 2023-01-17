@@ -159,7 +159,7 @@ class PermissionsPolicyMiddleware:
                 elif value in ("self", "*"):
                     item.append(value)
                 else:
-                    item.append(f'"{value}"')
+                    item.append(f'"{value}"')  # noqa: B028
             pieces.append(feature + "=(" + " ".join(item) + ")")
         return ", ".join(pieces)
 
