@@ -4,6 +4,13 @@ Changelog
 
 * Support Django 4.2.
 
+* Updated to the latest set of features from Chrome 111 dev.
+
+  New features:
+
+  - ``identity-credentials-get``
+  - ``storage-access``
+
 4.14.0 (2022-11-30)
 -------------------
 
