@@ -49,7 +49,6 @@ _FEATURE_NAMES: set[str] = {
     "cross-origin-isolated",
     "direct-sockets",
     "display-capture",
-    "document-domain",
     "encrypted-media",
     "execution-while-not-rendered",
     "execution-while-out-of-viewport",
@@ -59,6 +58,7 @@ _FEATURE_NAMES: set[str] = {
     "geolocation",
     "gyroscope",
     "hid",
+    "identity-credentials-get",
     "idle-detection",
     "keyboard-map",
     "local-fonts",
@@ -71,6 +71,7 @@ _FEATURE_NAMES: set[str] = {
     "publickey-credentials-get",
     "screen-wake-lock",
     "serial",
+    "storage-access",
     "sync-xhr",
     "unload",
     "usb",
@@ -86,6 +87,7 @@ _FEATURE_NAMES: set[str] = {
     # Retrieved from Firefox document.featurePolicy.allowedFeatures()
     # with dom.security.featurePolicy.header.enabled preference set to true
     # in about:config (plus a restart):
+    "document-domain",
     "speaker-selection",
     "vr",
     "web-share",
