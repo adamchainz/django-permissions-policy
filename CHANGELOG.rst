@@ -2,6 +2,9 @@
 Changelog
 =========
 
+4.15.0 (2023-02-25)
+-------------------
+
 * Support Django 4.2.
 
 * Updated to the latest set of features from Chrome 111 dev.
