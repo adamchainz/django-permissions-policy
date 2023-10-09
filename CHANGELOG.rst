@@ -4,6 +4,23 @@ Changelog
 
 * Support Django 5.0.
 
+* Updated to the latest set of features from Chrome 119 dev.
+
+  New features:
+
+  * ``browsing-topics``
+  * ``ch-prefers-reduced-transparency``
+  * ``ch-ua-form-factor``
+  * ``interest-cohort``
+  * ``join-ad-interest-group``
+  * ``private-aggregation``
+  * ``private-state-token-issuance``
+  * ``private-state-token-redemption``
+  * ``run-ad-auction``
+  * ``shared-storage``
+  * ``shared-storage-select-url``
+  * ``window-management``
+
 4.17.0 (2023-07-10)
 -------------------
 
