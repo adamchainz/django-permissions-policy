@@ -1,12 +1,10 @@
 from __future__ import annotations
 
-import asyncio
-import inspect
-from typing import Any
 from typing import Awaitable
 from typing import Callable
-from typing import TypeVar
 
+from asgiref.sync import iscoroutinefunction
+from asgiref.sync import markcoroutinefunction
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.signals import setting_changed
@@ -14,18 +12,6 @@ from django.dispatch import receiver
 from django.http import HttpRequest
 from django.http.response import HttpResponseBase
 from django.utils.functional import cached_property
-
-
-_F = TypeVar("_F", bound=Callable[..., Any])
-if hasattr(inspect, "markcoroutinefunction"):
-    iscoroutinefunction = inspect.iscoroutinefunction
-    markcoroutinefunction: Callable[[_F], _F] = inspect.markcoroutinefunction
-else:
-    iscoroutinefunction = asyncio.iscoroutinefunction  # type: ignore[assignment]
-
-    def markcoroutinefunction(func: _F) -> _F:
-        func._is_coroutine = asyncio.coroutines._is_coroutine  # type: ignore
-        return func
 
 
 _FEATURE_NAMES: set[str] = {
