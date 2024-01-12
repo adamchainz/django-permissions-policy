@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import inspect
 import asyncio
-from typing import Awaitable
+from typing import Any, Awaitable, TypeVar
 from typing import Callable
 
 from django.conf import settings
@@ -11,6 +12,19 @@ from django.dispatch import receiver
 from django.http import HttpRequest
 from django.http.response import HttpResponseBase
 from django.utils.functional import cached_property
+
+
+_F = TypeVar("_F", bound=Callable[..., Any])
+if hasattr(inspect, "markcoroutinefunction"):
+    iscoroutinefunction = inspect.iscoroutinefunction
+    markcoroutinefunction: Callable[[_F], _F] = inspect.markcoroutinefunction
+else:
+    iscoroutinefunction = asyncio.iscoroutinefunction  # type: ignore[assignment]
+
+    def markcoroutinefunction(func: _F) -> _F:
+        func._is_coroutine = asyncio.coroutines._is_coroutine  # type: ignore
+        return func
+
 
 _FEATURE_NAMES: set[str] = {
     # Base and Chrome-only features
@@ -113,14 +127,10 @@ class PermissionsPolicyMiddleware:
     ) -> None:
         self.get_response = get_response
 
-        if asyncio.iscoroutinefunction(self.get_response):
+        if iscoroutinefunction(self.get_response):
             # Mark the class as async-capable, but do the actual switch
             # inside __call__ to avoid swapping out dunder methods
-            self._is_coroutine = (
-                asyncio.coroutines._is_coroutine  # type: ignore [attr-defined]
-            )
-        else:
-            self._is_coroutine = None
+            markcoroutinefunction(self)
 
         self.header_value  # Access at setup so ImproperlyConfigured can be raised
         receiver(setting_changed)(self.clear_header_value)
@@ -128,7 +138,7 @@ class PermissionsPolicyMiddleware:
     def __call__(
         self, request: HttpRequest
     ) -> HttpResponseBase | Awaitable[HttpResponseBase]:
-        if self._is_coroutine:
+        if iscoroutinefunction(self):
             return self.__acall__(request)
         response = self.get_response(request)
         assert isinstance(response, HttpResponseBase)  # type narrow
