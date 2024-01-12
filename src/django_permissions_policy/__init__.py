@@ -1,9 +1,11 @@
 from __future__ import annotations
 
-import inspect
 import asyncio
-from typing import Any, Awaitable, TypeVar
+import inspect
+from typing import Any
+from typing import Awaitable
 from typing import Callable
+from typing import TypeVar
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
