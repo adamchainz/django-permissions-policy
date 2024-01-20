@@ -2,6 +2,10 @@
 Changelog
 =========
 
+* Fix ASGI compatibility on Python 3.12.
+
+  Thanks to Alexandre Spaeth for the report in `Issue #425 <https://github.com/adamchainz/django-permissions-policy/issues/425>`__.
+
 4.18.0 (2023-10-09)
 -------------------
 
