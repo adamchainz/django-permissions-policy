@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from http import HTTPStatus
+
 import pytest
 from django.core.exceptions import ImproperlyConfigured
 from django.test import override_settings
@@ -13,7 +15,7 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
     def test_index(self):
         resp = self.client.get("/")
 
-        assert resp.status_code == 200
+        assert resp.status_code == HTTPStatus.OK
         assert resp.content == b"Hello World"
 
     def test_no_setting(self):
@@ -106,6 +108,7 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
 
     async def test_async(self):
         with override_settings(PERMISSIONS_POLICY={"geolocation": "self"}):
-            resp = await self.async_client.get("async/")
+            resp = await self.async_client.get("/async/")
 
+        assert resp.status_code == HTTPStatus.OK
         assert resp["Permissions-Policy"] == "geolocation=(self)"
