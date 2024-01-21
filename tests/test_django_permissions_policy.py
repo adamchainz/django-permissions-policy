@@ -106,6 +106,6 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
 
     async def test_async(self):
         with override_settings(PERMISSIONS_POLICY={"geolocation": "self"}):
-            resp = await self.async_client.get("/")
+            resp = await self.async_client.get("async/")
 
         assert resp["Permissions-Policy"] == "geolocation=(self)"
