@@ -114,8 +114,9 @@ class PermissionsPolicyMiddleware:
         ),
     ) -> None:
         self.get_response = get_response
+        self.async_mode = iscoroutinefunction(self.get_response)
 
-        if iscoroutinefunction(self.get_response):
+        if self.async_mode:
             # Mark the class as async-capable, but do the actual switch
             # inside __call__ to avoid swapping out dunder methods
             markcoroutinefunction(self)
@@ -126,7 +127,7 @@ class PermissionsPolicyMiddleware:
     def __call__(
         self, request: HttpRequest
     ) -> HttpResponseBase | Awaitable[HttpResponseBase]:
-        if iscoroutinefunction(self):
+        if self.async_mode:
             return self.__acall__(request)
         response = self.get_response(request)
         assert isinstance(response, HttpResponseBase)  # type narrow
