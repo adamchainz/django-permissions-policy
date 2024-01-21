@@ -2,6 +2,9 @@ from __future__ import annotations
 
 from django.urls import path
 
-from tests.testapp.views import index
+from tests.testapp import views
 
-urlpatterns = [path("", index, name="index")]
+urlpatterns = [
+    path("", views.index),
+    path("async/", views.async_index),
+]

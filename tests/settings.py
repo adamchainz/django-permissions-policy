@@ -18,6 +18,7 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS: list[str] = []
 
 MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
     "django_permissions_policy.PermissionsPolicyMiddleware",
     "django.middleware.common.CommonMiddleware",
 ]

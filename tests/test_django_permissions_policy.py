@@ -1,14 +1,12 @@
 from __future__ import annotations
 
+from http import HTTPStatus
+
 import pytest
 from django.core.exceptions import ImproperlyConfigured
-from django.http import HttpResponse
-from django.http.response import HttpResponseBase
 from django.test import override_settings
 from django.test import RequestFactory
 from django.test import SimpleTestCase
-
-from django_permissions_policy import PermissionsPolicyMiddleware
 
 
 class PermissionsPolicyMiddlewareTests(SimpleTestCase):
@@ -17,7 +15,7 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
     def test_index(self):
         resp = self.client.get("/")
 
-        assert resp.status_code == 200
+        assert resp.status_code == HTTPStatus.OK
         assert resp.content == b"Hello World"
 
     def test_no_setting(self):
@@ -109,15 +107,8 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
         assert resp["Permissions-Policy"] == "geolocation=(self)"
 
     async def test_async(self):
-        async def dummy_async_view(request):
-            return HttpResponse("Hello!")
-
-        middleware = PermissionsPolicyMiddleware(dummy_async_view)
-        request = self.request_factory.get("/", HTTP_HX_REQUEST="true")
-
         with override_settings(PERMISSIONS_POLICY={"geolocation": "self"}):
-            result = middleware(request)
-            assert not isinstance(result, HttpResponseBase)  # type narrow
-            response = await result
+            resp = await self.async_client.get("/async/")
 
-        assert response["Permissions-Policy"] == "geolocation=(self)"
+        assert resp.status_code == HTTPStatus.OK
+        assert resp["Permissions-Policy"] == "geolocation=(self)"

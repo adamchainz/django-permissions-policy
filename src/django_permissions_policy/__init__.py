@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-import asyncio
 from typing import Awaitable
 from typing import Callable
 
+from asgiref.sync import iscoroutinefunction
+from asgiref.sync import markcoroutinefunction
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.signals import setting_changed
@@ -11,6 +12,7 @@ from django.dispatch import receiver
 from django.http import HttpRequest
 from django.http.response import HttpResponseBase
 from django.utils.functional import cached_property
+
 
 _FEATURE_NAMES: set[str] = {
     # Base and Chrome-only features
@@ -112,15 +114,12 @@ class PermissionsPolicyMiddleware:
         ),
     ) -> None:
         self.get_response = get_response
+        self.async_mode = iscoroutinefunction(self.get_response)
 
-        if asyncio.iscoroutinefunction(self.get_response):
+        if self.async_mode:
             # Mark the class as async-capable, but do the actual switch
             # inside __call__ to avoid swapping out dunder methods
-            self._is_coroutine = (
-                asyncio.coroutines._is_coroutine  # type: ignore [attr-defined]
-            )
-        else:
-            self._is_coroutine = None
+            markcoroutinefunction(self)
 
         self.header_value  # Access at setup so ImproperlyConfigured can be raised
         receiver(setting_changed)(self.clear_header_value)
@@ -128,7 +127,7 @@ class PermissionsPolicyMiddleware:
     def __call__(
         self, request: HttpRequest
     ) -> HttpResponseBase | Awaitable[HttpResponseBase]:
-        if self._is_coroutine:
+        if self.async_mode:
             return self.__acall__(request)
         response = self.get_response(request)
         assert isinstance(response, HttpResponseBase)  # type narrow
