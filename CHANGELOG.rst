@@ -6,6 +6,13 @@ Changelog
 
   Thanks to Alexandre Spaeth in `PR #426 <https://github.com/adamchainz/django-permissions-policy/pull/426>`__.
 
+* Updated to the latest set of features from Chrome 122 dev.
+
+  New features:
+
+  - ``publickey-credentials-create``
+  - ``usb-unrestricted``
+
 4.18.0 (2023-10-09)
 -------------------
 
