@@ -6,7 +6,7 @@ requires = [
 
 [project]
 name = "django-permissions-policy"
-version = "4.18.0"
+version = "4.19.0"
 description = "Set the draft security HTTP header Permissions-Policy (previously Feature-Policy) on your Django app."
 readme = {file = "README.rst", content-type = "text/x-rst"}
 keywords = [
