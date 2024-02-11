@@ -4,9 +4,9 @@ from http import HTTPStatus
 
 import pytest
 from django.core.exceptions import ImproperlyConfigured
-from django.test import override_settings
 from django.test import RequestFactory
 from django.test import SimpleTestCase
+from django.test import override_settings
 
 
 class PermissionsPolicyMiddlewareTests(SimpleTestCase):

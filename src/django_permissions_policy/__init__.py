@@ -13,7 +13,6 @@ from django.http import HttpRequest
 from django.http.response import HttpResponseBase
 from django.utils.functional import cached_property
 
-
 _FEATURE_NAMES: set[str] = {
     # Base and Chrome-only features
     # Retrieved from Chrome document.featurePolicy.allowedFeatures()
