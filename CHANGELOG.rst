@@ -2,6 +2,9 @@
 Changelog
 =========
 
+4.21.0 (2024-08-08)
+-------------------
+
 * Updated to the latest set of features from Chrome 129 dev.
 
   New features:
