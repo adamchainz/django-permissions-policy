@@ -2,6 +2,21 @@
 Changelog
 =========
 
+* Updated to the latest set of features from Chrome 129 dev.
+
+  New features:
+
+  * ``captured-surface-control``
+  * ``ch-ua-form-factors`` (renamed from ``ch-ua-form-factor``)
+  * ``deferred-fetch``
+  * ``digital-credentials-get``
+
+  Removed features:
+
+  * ``ch-ua-form-factor``
+  * ``direct-sockets``
+  * ``usb-unrestricted``
+
 4.20.0 (2024-06-19)
 -------------------
 
