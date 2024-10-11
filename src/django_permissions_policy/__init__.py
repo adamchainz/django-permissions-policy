@@ -76,6 +76,7 @@ _FEATURE_NAMES: set[str] = {
     "otp-credentials",
     "payment",
     "picture-in-picture",
+    "popins",
     "private-aggregation",
     "private-state-token-issuance",
     "private-state-token-redemption",
@@ -92,6 +93,7 @@ _FEATURE_NAMES: set[str] = {
     "unload",
     "usb",
     "vertical-scroll",
+    "web-app-installation",
     "window-management",
     "xr-spatial-tracking",
     # Firefox-only features.
