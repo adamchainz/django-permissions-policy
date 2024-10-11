@@ -2,6 +2,13 @@
 Changelog
 =========
 
+* Updated to the latest set of features from Chrome 131 dev.
+
+  New features:
+
+  * ``popins``
+  * ``web-app-installation``
+
 * Drop Python 3.8 support.
 
 * Support Python 3.13.
