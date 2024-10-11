@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Awaitable
+from collections.abc import Awaitable
 from typing import Callable
 
 from asgiref.sync import iscoroutinefunction
