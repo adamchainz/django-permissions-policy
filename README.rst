@@ -18,7 +18,9 @@ django-permissions-policy
    :target: https://github.com/pre-commit/pre-commit
    :alt: pre-commit
 
-Set the draft security HTTP header ``Permissions-Policy`` (previously ``Feature-Policy``) on your Django app.
+----
+
+Set the ``Permissions-Policy`` HTTP header on your Django app.
 
 ----
 
