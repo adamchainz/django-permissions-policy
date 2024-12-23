@@ -67,7 +67,6 @@ in your stack:
            "autoplay": [],
            "camera": [],
            "display-capture": [],
-           "document-domain": [],
            "encrypted-media": [],
            "fullscreen": [],
            "geolocation": [],
