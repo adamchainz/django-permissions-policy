@@ -53,6 +53,7 @@ _FEATURE_NAMES: set[str] = {
     "compute-pressure",
     "cross-origin-isolated",
     "deferred-fetch",
+    "deferred-fetch-minimal",
     "digital-credentials-get",
     "display-capture",
     "encrypted-media",

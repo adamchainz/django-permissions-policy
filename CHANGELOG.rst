@@ -2,6 +2,12 @@
 Changelog
 =========
 
+* Updated to the latest set of features from Chrome 133 dev.
+
+  New features:
+
+  * ``deferred-fetch-minimal``
+
 4.23.0 (2024-10-29)
 -------------------
 
