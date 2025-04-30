@@ -2,6 +2,9 @@
 Changelog
 =========
 
+4.26.0 (2025-04-30)
+-------------------
+
 * Updated to the latest set of features from Chrome 137 dev.
 
   New features:
