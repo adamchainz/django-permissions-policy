@@ -2,6 +2,17 @@
 Changelog
 =========
 
+* Updated to the latest set of features from Chrome 137 dev.
+
+  New features:
+
+  * ``device-attributes``
+  * ``language-detector``
+  * ``rewriter``
+  * ``summarizer``
+  * ``translator``
+  * ``writer``
+
 4.25.0 (2025-02-06)
 -------------------
 
