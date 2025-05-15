@@ -410,7 +410,7 @@ Changelog
 ------------------
 
 * Updated to the latest set of features from Chrome. This adds 17 new features:
-  'ch-device-memory', 'ch-downlink', 'ch-dpr', 'ch-etc', 'ch-lang', 'ch-rtt',
+  'ch-device-memory', 'ch-downlink', 'ch-dpr', 'ch-ect', 'ch-lang', 'ch-rtt',
   'ch-ua', 'ch-ua-arch', 'ch-ua-model', 'ch-ua-platform', 'ch-viewport-width',
   'ch-width', 'execution-while-not-rendered', and
   'execution-while-out-of-viewport'. Chrome has also removed support for
