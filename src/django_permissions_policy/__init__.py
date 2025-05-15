@@ -28,7 +28,7 @@ _FEATURE_NAMES: set[str] = {
     "ch-device-memory",
     "ch-downlink",
     "ch-dpr",
-    "ch-ect",
+    "ch-etc",
     "ch-prefers-color-scheme",
     "ch-prefers-reduced-motion",
     "ch-prefers-reduced-transparency",
