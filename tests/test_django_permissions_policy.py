@@ -4,9 +4,7 @@ from http import HTTPStatus
 
 import pytest
 from django.core.exceptions import ImproperlyConfigured
-from django.test import RequestFactory
-from django.test import SimpleTestCase
-from django.test import override_settings
+from django.test import RequestFactory, SimpleTestCase, override_settings
 
 
 class PermissionsPolicyMiddlewareTests(SimpleTestCase):
@@ -84,9 +82,11 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
         )
 
     def test_unknown_feature(self):
-        with override_settings(PERMISSIONS_POLICY={"accelerometor": "self"}):
-            with pytest.raises(ImproperlyConfigured):
-                self.client.get("/")
+        with (
+            override_settings(PERMISSIONS_POLICY={"accelerometor": "self"}),
+            pytest.raises(ImproperlyConfigured),
+        ):
+            self.client.get("/")
 
     def test_setting_changing(self):
         with override_settings(PERMISSIONS_POLICY={}):
