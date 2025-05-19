@@ -3,8 +3,7 @@ from __future__ import annotations
 from collections.abc import Awaitable
 from typing import Callable
 
-from asgiref.sync import iscoroutinefunction
-from asgiref.sync import markcoroutinefunction
+from asgiref.sync import iscoroutinefunction, markcoroutinefunction
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.signals import setting_changed
@@ -132,7 +131,7 @@ class PermissionsPolicyMiddleware:
             # inside __call__ to avoid swapping out dunder methods
             markcoroutinefunction(self)
 
-        self.header_value  # Access at setup so ImproperlyConfigured can be raised
+        self.header_value  # noqa: B018 - Access at setup so ImproperlyConfigured can be raised
         receiver(setting_changed)(self.clear_header_value)
 
     def __call__(
