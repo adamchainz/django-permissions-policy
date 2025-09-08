@@ -7,6 +7,19 @@ Unreleased
 
 * Support Python 3.14.
 
+* Updated to the latest set of features from Chrome 141 dev.
+
+  New features:
+
+  * ``aria-notify``
+  * ``language-model``
+  * ``local-network-access``
+  * ``on-device-speech-recognition``
+
+  Removed features:
+
+  * ``web-app-installation``
+
 4.26.0 (2025-04-30)
 -------------------
 
