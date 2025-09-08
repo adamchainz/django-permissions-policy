@@ -138,8 +138,8 @@ name = "django"
 version = "4.2.23"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
-    "python_full_version < '3.10'",
     "python_full_version >= '3.10'",
+    "python_full_version < '3.10'",
 ]
 dependencies = [
     { name = "asgiref", marker = "python_full_version < '3.10' or extra == 'group-25-django-permissions-policy-django42' or (extra == 'group-25-django-permissions-policy-django50' and extra == 'group-25-django-permissions-policy-django51') or (extra == 'group-25-django-permissions-policy-django50' and extra == 'group-25-django-permissions-policy-django52') or (extra == 'group-25-django-permissions-policy-django51' and extra == 'group-25-django-permissions-policy-django52')" },
@@ -204,7 +204,7 @@ wheels = [
 
 [[package]]
 name = "django-permissions-policy"
-version = "4.26.0"
+version = "4.27.0"
 source = { editable = "." }
 dependencies = [
     { name = "asgiref" },
