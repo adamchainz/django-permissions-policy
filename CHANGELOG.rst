@@ -2,8 +2,8 @@
 Changelog
 =========
 
-Pending
--------
+4.29.0 (2026-03-27)
+-------------------
 
 * Add support for the ``Permissions-Policy-Report-Only`` header, which allows you to test a policy without enforcing it, through the new ``PERMISSIONS_POLICY_REPORT_ONLY`` setting.
 
