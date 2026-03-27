@@ -6,6 +6,19 @@ Changelog
 
   `PR #533 <https://github.com/adamchainz/django-permissions-policy/pull/533>`__.
 
+* Updated to the latest set of features from Chrome 141 dev.
+
+  New features:
+
+  * ``ch-ua-high-entropy-values``
+  * ``digital-credentials-create``
+  * ``local-network``
+  * ``loopback-network``
+
+  Removed features:
+
+  * ``popins``
+
 * Drop Python 3.9 support.
 
 4.28.0 (2025-09-18)
