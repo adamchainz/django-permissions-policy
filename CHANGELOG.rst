@@ -2,24 +2,33 @@
 Changelog
 =========
 
+Pending
+-------
+
 * Add support for the ``Permissions-Policy-Report-Only`` header, which allows you to test a policy without enforcing it, through the new ``PERMISSIONS_POLICY_REPORT_ONLY`` setting.
 
   `PR #533 <https://github.com/adamchainz/django-permissions-policy/pull/533>`__.
 
-* Updated to the latest set of features from Chrome 141 dev.
+* Move to pulling the set of valid features from the Chrome and Firefox source code.
 
   New features:
 
+  * ``autofill``
   * ``ch-ua-high-entropy-values``
   * ``digital-credentials-create``
+  * ``fenced-unpartitioned-storage-read``
   * ``local-network``
   * ``loopback-network``
+  * ``manual-text``
+  * ``media-playback-while-not-visible``
+  * ``record-ad-auction-events``
+  * ``web-app-installation``
 
   Removed features:
 
   * ``popins``
 
-* Drop Python 3.9 support.
+  * Drop Python 3.9 support.
 
 4.28.0 (2025-09-18)
 -------------------
