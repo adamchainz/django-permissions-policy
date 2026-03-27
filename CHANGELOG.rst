@@ -2,6 +2,10 @@
 Changelog
 =========
 
+* Add support for the ``Permissions-Policy-Report-Only`` header, which allows you to test a policy without enforcing it, through the new ``PERMISSIONS_POLICY_REPORT_ONLY`` setting.
+
+  `PR #533 <https://github.com/adamchainz/django-permissions-policy/pull/533>`__.
+
 * Drop Python 3.9 support.
 
 4.28.0 (2025-09-18)

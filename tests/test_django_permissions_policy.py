@@ -16,7 +16,7 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
         assert resp.status_code == HTTPStatus.OK
         assert resp.content == b"Hello World"
 
-    def test_no_setting(self):
+    def test_no_settings(self):
         resp = self.client.get("/")
 
         assert "Permissions-Policy" not in resp
@@ -26,6 +26,12 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
             resp = self.client.get("/")
 
         assert "Permissions-Policy" not in resp
+
+    def test_empty_report_only_setting(self):
+        with override_settings(PERMISSIONS_POLICY_REPORT_ONLY={}):
+            resp = self.client.get("/")
+
+        assert "Permissions-Policy-Report-Only" not in resp
 
     def test_anyone_can_geolocate_list(self):
         with override_settings(PERMISSIONS_POLICY={"geolocation": ["*"]}):
@@ -97,6 +103,15 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
 
         assert resp["Permissions-Policy"] == "geolocation=(self)"
 
+    def test_report_only_setting_changing(self):
+        with override_settings(PERMISSIONS_POLICY_REPORT_ONLY={}):
+            self.client.get("/")  # Forces middleware instantiation
+
+        with override_settings(PERMISSIONS_POLICY_REPORT_ONLY={"geolocation": "self"}):
+            resp = self.client.get("/")
+
+        assert resp["Permissions-Policy-Report-Only"] == "geolocation=(self)"
+
     def test_other_setting_changing(self):
         with override_settings(PERMISSIONS_POLICY={"geolocation": "self"}):
             self.client.get("/")  # Forces middleware instantiation
@@ -106,9 +121,23 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
 
         assert resp["Permissions-Policy"] == "geolocation=(self)"
 
+    async def test_async_no_settings(self):
+        resp = await self.async_client.get("/async/")
+
+        assert resp.status_code == HTTPStatus.OK
+        assert "Permissions-Policy" not in resp
+        assert "Permissions-Policy-Report-Only" not in resp
+
     async def test_async(self):
         with override_settings(PERMISSIONS_POLICY={"geolocation": "self"}):
             resp = await self.async_client.get("/async/")
 
         assert resp.status_code == HTTPStatus.OK
         assert resp["Permissions-Policy"] == "geolocation=(self)"
+
+    async def test_async_report_only(self):
+        with override_settings(PERMISSIONS_POLICY_REPORT_ONLY={"geolocation": "self"}):
+            resp = await self.async_client.get("/async/")
+
+        assert resp.status_code == HTTPStatus.OK
+        assert resp["Permissions-Policy-Report-Only"] == "geolocation=(self)"

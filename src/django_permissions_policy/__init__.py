@@ -133,7 +133,8 @@ class PermissionsPolicyMiddleware:
             # inside __call__ to avoid swapping out dunder methods
             markcoroutinefunction(self)
 
-        self.header_value  # noqa: B018 - Access at setup so ImproperlyConfigured can be raised
+        self.permissions_policy  # noqa: B018 - Access at setup so ImproperlyConfigured can be raised
+        self.permissions_policy_report_only  # noqa: B018 - Access at setup so ImproperlyConfigured can be raised
         receiver(setting_changed)(self.clear_header_value)
 
     def __call__(
@@ -143,25 +144,36 @@ class PermissionsPolicyMiddleware:
             return self.__acall__(request)
         response = self.get_response(request)
         assert isinstance(response, HttpResponseBase)  # type narrow
-        value = self.header_value
-        if value:
-            response["Permissions-Policy"] = value
+
+        if permissions_policy := self.permissions_policy:
+            response["Permissions-Policy"] = permissions_policy
+        if permissions_policy_report_only := self.permissions_policy_report_only:
+            response["Permissions-Policy-Report-Only"] = permissions_policy_report_only
         return response
 
     async def __acall__(self, request: HttpRequest) -> HttpResponseBase:
         result = self.get_response(request)
         assert not isinstance(result, HttpResponseBase)  # type narrow
         response = await result
-        value = self.header_value
-        if value:  # pragma: no branch
-            response["Permissions-Policy"] = value
+        if permissions_policy := self.permissions_policy:
+            response["Permissions-Policy"] = permissions_policy
+        if permissions_policy_report_only := self.permissions_policy_report_only:
+            response["Permissions-Policy-Report-Only"] = permissions_policy_report_only
         return response
 
     @cached_property
-    def header_value(self) -> str:
-        setting: dict[str, str | list[str] | tuple[str]] = getattr(
-            settings, "PERMISSIONS_POLICY", {}
+    def permissions_policy(self) -> str:
+        return self.compute_header_value(getattr(settings, "PERMISSIONS_POLICY", {}))
+
+    @cached_property
+    def permissions_policy_report_only(self) -> str:
+        return self.compute_header_value(
+            getattr(settings, "PERMISSIONS_POLICY_REPORT_ONLY", {})
         )
+
+    def compute_header_value(
+        self, setting: dict[str, str | list[str] | tuple[str]]
+    ) -> str:
         pieces = []
         for feature, values in sorted(setting.items()):
             if feature not in _FEATURE_NAMES:
@@ -185,6 +197,11 @@ class PermissionsPolicyMiddleware:
     def clear_header_value(self, setting: str, **kwargs: object) -> None:
         if setting == "PERMISSIONS_POLICY":
             try:
-                del self.header_value
+                del self.permissions_policy
+            except AttributeError:
+                pass
+        elif setting == "PERMISSIONS_POLICY_REPORT_ONLY":
+            try:
+                del self.permissions_policy_report_only
             except AttributeError:
                 pass
