@@ -57,9 +57,8 @@ in your stack:
         ...,
     ]
 
-3. Add the ``PERMISSIONS_POLICY`` setting to your settings, naming at least one
-   feature. Here’s an example that sets a strict policy to disable many
-   potentially privacy-invading and annoying features for all scripts:
+3. Add a ``PERMISSIONS_POLICY`` or ``PERMISSIONS_POLICY_REPORT_ONLY`` setting to your settings file, naming at least one feature.
+   Here’s an example that sets a strict policy to disable many potentially privacy-invading and annoying features for all scripts:
 
    .. code-block:: python
 
@@ -81,26 +80,32 @@ in your stack:
            "usb": [],
        }
 
-   See below for more information on the setting.
+   See below for more information on the settings.
 
-Setting
--------
+Settings
+--------
 
-Change the ``PERMISSIONS_POLICY`` setting to configure the contents of the
-header.
+The permissions policy for your page is configured with two settings:
 
-The setting should be a dictionary laid out with:
+* ``PERMISSIONS_POLICY`` - sets the ``Permissions-Policy`` header, which defines the policy that the browser enforces.
+* ``PERMISSIONS_POLICY_REPORT_ONLY`` - sets the ``Permissions-Policy-Report-Only`` header, which defines a policy that the browser simulates but does not enforce.
 
-* Keys as the names of browser features - a full list is available on the
-  `W3 Spec repository`_. The `MDN article`_ is also worth reading.
-* Values as lists of strings, where each string is either an origin, e.g.
-  ``'https://example.com'``, or of the special values ``'self'`` or ``'*'``. If
-  there is just one value, no containing list is necessary. To represent no
-  origins being allowed, use an empty list.
+In both cases, any violations are reported to the console and optionally to a reporting endpoint defined by the |Reporting-Endpoints header|__.
+The report-only header is useful for testing a new policy before enforcing it.
 
-  Note that in the header, domains are wrapped in double quotes - do not
-  include these quotes within your Python string, as they will be added by the
-  middleware.
+.. |Reporting-Endpoints header| replace:: ``Reporting-Endpoints`` header
+__ https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Reporting-Endpoints
+
+Each setting should be a dictionary laid out with:
+
+* Keys as the names of browser features - a full list is available on the `W3 Spec repository`_.
+  The `MDN article`_ is also worth reading.
+
+* Values as lists of strings, where each string is either an origin, e.g. ``'https://example.com'``, or of the special values ``'self'`` or ``'*'``.
+  If there is just one value, no containing list is necessary.
+  To represent no origins being allowed, use an empty list.
+
+  Note that in the header, domains are wrapped in double quotes - do not include these quotes within your Python string, as they will be added by the middleware.
 
 .. _W3 Spec repository: https://github.com/w3c/webappsec-permissions-policy/blob/master/features.md
 .. _MDN article: https://developer.mozilla.org/en-US/docs/Web/HTTP/Feature_Policy#Browser_compatibility
@@ -110,9 +115,8 @@ The current feature list is pulled from the JavaScript API with ``document.featu
 Browsers don’t always recognize all features, depending on the version and configuration.
 You may see warnings in the console for unavailable features in the header - these are normally safe to ignore, since django-permissions-policy already validates that you don’t have completely unknown names.
 
-For backwards compatibility with old configuration, the value ``'none'`` is
-supported in lists, but ignored - it's preferable to use the empty list
-instead. It doesn't make sense to specify ``'none'`` alongside other values.
+For backwards compatibility with old configuration, the value ``'none'`` is supported in lists, but ignored - it's preferable to use the empty list instead.
+It doesn't make sense to specify ``'none'`` alongside other values.
 
 Examples
 ~~~~~~~~
@@ -125,8 +129,7 @@ Disable geolocation entirely, for the current origin and any iframes:
         "geolocation": [],
     }
 
-Allow autoplay from only the current origin and iframes from
-``https://archive.org``:
+Allow autoplay from only the current origin and iframes from ``https://archive.org``:
 
 .. code-block:: python
 
@@ -140,4 +143,15 @@ Allow autoplay from all origins:
 
     PERMISSIONS_POLICY = {
         "autoplay": "*",
+    }
+
+Disable geolocation entirely, and test the effect of allowing autoplay from certain domains:
+
+.. code-block:: python
+
+    PERMISSIONS_POLICY = {
+        "geolocation": [],
+    }
+    PERMISSIONS_POLICY_REPORT_ONLY = {
+        "autoplay": ["self", "https://archive.org"],
     }
