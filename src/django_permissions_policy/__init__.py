@@ -12,13 +12,13 @@ from django.http.response import HttpResponseBase
 from django.utils.functional import cached_property
 
 _FEATURE_NAMES: set[str] = {
-    # Base and Chrome-only features
-    # Retrieved from Chrome document.featurePolicy.allowedFeatures()
-    # with flag "Experimental Web Platform features" turned on:
+    # Chrome features (99)
+    # https://github.com/chromium/chromium/raw/refs/heads/main/services/network/public/cpp/permissions_policy/permissions_policy_features.json5
     "accelerometer",
     "ambient-light-sensor",
     "aria-notify",
     "attribution-reporting",
+    "autofill",
     "autoplay",
     "bluetooth",
     "browsing-topics",
@@ -61,6 +61,7 @@ _FEATURE_NAMES: set[str] = {
     "encrypted-media",
     "execution-while-not-rendered",
     "execution-while-out-of-viewport",
+    "fenced-unpartitioned-storage-read",
     "focus-without-user-activation",
     "fullscreen",
     "gamepad",
@@ -79,6 +80,8 @@ _FEATURE_NAMES: set[str] = {
     "local-network-access",
     "loopback-network",
     "magnetometer",
+    "manual-text",
+    "media-playback-while-not-visible",
     "microphone",
     "midi",
     "on-device-speech-recognition",
@@ -90,6 +93,7 @@ _FEATURE_NAMES: set[str] = {
     "private-state-token-redemption",
     "publickey-credentials-create",
     "publickey-credentials-get",
+    "record-ad-auction-events",
     "rewriter",
     "run-ad-auction",
     "screen-wake-lock",
@@ -104,16 +108,15 @@ _FEATURE_NAMES: set[str] = {
     "unload",
     "usb",
     "vertical-scroll",
+    "web-app-installation",
+    "web-share",
     "window-management",
     "writer",
     "xr-spatial-tracking",
-    # Firefox-only features.
-    # Retrieved from Firefox document.featurePolicy.allowedFeatures()
-    # with dom.security.featurePolicy.header.enabled preference set to true
-    # in about:config (plus a restart):
+    # Firefox-only features (2)
+    # https://github.com/mozilla/gecko-dev/raw/refs/heads/master/dom/security/featurepolicy/FeaturePolicyUtils.cpp
     "document-domain",
     "vr",
-    "web-share",
 }
 
 
