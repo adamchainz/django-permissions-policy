@@ -67,11 +67,11 @@ def update_init(
     firefox_only: set[str],
 ) -> None:
     lines: list[str] = []
-    lines.append(f"    # Chrome features ({len(chromium_features)})")
+    lines.append("    # Chrome features")
     lines.append(f"    # {CHROMIUM_URL}")
     for name in sorted(chromium_features):
         lines.append(f'    "{name}",')
-    lines.append(f"    # Firefox-only features ({len(firefox_only)})")
+    lines.append("    # Firefox-only features")
     lines.append(f"    # {FIREFOX_URL}")
     for name in sorted(firefox_only):
         lines.append(f'    "{name}",')

@@ -12,7 +12,7 @@ from django.http.response import HttpResponseBase
 from django.utils.functional import cached_property
 
 _FEATURE_NAMES: set[str] = {
-    # Chrome features (99)
+    # Chrome features
     # https://github.com/chromium/chromium/raw/refs/heads/main/services/network/public/cpp/permissions_policy/permissions_policy_features.json5
     "accelerometer",
     "ambient-light-sensor",
@@ -113,7 +113,7 @@ _FEATURE_NAMES: set[str] = {
     "window-management",
     "writer",
     "xr-spatial-tracking",
-    # Firefox-only features (2)
+    # Firefox-only features
     # https://github.com/mozilla/gecko-dev/raw/refs/heads/master/dom/security/featurepolicy/FeaturePolicyUtils.cpp
     "document-domain",
     "vr",
