@@ -2,8 +2,8 @@
 Changelog
 =========
 
-Pending
--------
+4.30.0 (2026-05-13)
+-------------------
 
 * Update feature list from Chrome and Firefox sources.
 
