@@ -2,6 +2,19 @@
 Changelog
 =========
 
+Pending
+-------
+
+* Update feature list from Chrome and Firefox sources.
+
+  New features:
+
+  * ``tools``
+
+  Removed features:
+
+  * ``fenced-unpartitioned-storage-read``
+
 4.29.0 (2026-03-27)
 -------------------
 
