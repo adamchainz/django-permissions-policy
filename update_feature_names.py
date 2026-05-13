@@ -97,7 +97,7 @@ def update_changelog(
     if not added and not removed:
         return
 
-    entry_lines = ["* Updated feature list from Chrome and Firefox sources.", ""]
+    entry_lines = ["* Update feature list from Chrome and Firefox sources.", ""]
     if added:
         entry_lines += ["  New features:", ""]
         entry_lines += [f"  * ``{name}``" for name in sorted(added)]
