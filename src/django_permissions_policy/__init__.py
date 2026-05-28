@@ -169,21 +169,29 @@ class PermissionsPolicyMiddleware:
 
     @cached_property
     def permissions_policy(self) -> str:
-        return self.compute_header_value(getattr(settings, "PERMISSIONS_POLICY", {}))
+        return self.compute_header_value(
+            getattr(settings, "PERMISSIONS_POLICY", {}),
+            setting_name="PERMISSIONS_POLICY",
+        )
 
     @cached_property
     def permissions_policy_report_only(self) -> str:
         return self.compute_header_value(
-            getattr(settings, "PERMISSIONS_POLICY_REPORT_ONLY", {})
+            getattr(settings, "PERMISSIONS_POLICY_REPORT_ONLY", {}),
+            setting_name="PERMISSIONS_POLICY_REPORT_ONLY",
         )
 
     def compute_header_value(
-        self, setting: dict[str, str | list[str] | tuple[str]]
+        self,
+        setting: dict[str, str | list[str] | tuple[str]],
+        setting_name: str,
     ) -> str:
         pieces = []
         for feature, values in sorted(setting.items()):
             if feature not in _FEATURE_NAMES:
-                raise ImproperlyConfigured(f"Unknown feature {feature}")
+                raise ImproperlyConfigured(
+                    f"Unknown feature '{feature}' in {setting_name}"
+                )
             if isinstance(values, str):
                 values = (values,)
 

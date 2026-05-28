@@ -2,6 +2,11 @@
 Changelog
 =========
 
+Pending
+-------
+
+* Made ``ImproperlyConfigured`` errors name the responsible setting.
+
 4.30.0 (2026-05-13)
 -------------------
 
