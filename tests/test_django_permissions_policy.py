@@ -90,7 +90,10 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
     def test_unknown_feature(self):
         with (
             override_settings(PERMISSIONS_POLICY={"accelerometor": "self"}),
-            pytest.raises(ImproperlyConfigured),
+            pytest.raises(
+                ImproperlyConfigured,
+                match="Unknown feature 'accelerometor' in PERMISSIONS_POLICY",
+            ),
         ):
             self.client.get("/")
 
