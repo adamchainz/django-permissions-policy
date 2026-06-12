@@ -155,3 +155,86 @@ Disable geolocation entirely, and test the effect of allowing autoplay from cert
     PERMISSIONS_POLICY_REPORT_ONLY = {
         "autoplay": ["self", "https://archive.org"],
     }
+
+Decorators
+----------
+
+Use the below decorators to override the permissions policies (live and report-only) on a per-view basis.
+The decorators fully replace the given policy set by the global settings for that view, rather than merging with it.
+
+The examples below use function-based views.
+To decorate class-based views, use the ``@method_decorator`` per `Django's class-based view decoration documentation <https://docs.djangoproject.com/en/stable/topics/class-based-views/intro/#decorating-class-based-views>`__.
+
+``permissions_policy_override(config)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overrides the ``Permissions-Policy`` header for the decorated view, using a dictionary
+in the same format as the ``PERMISSIONS_POLICY`` setting.
+
+If ``config`` is an empty mapping (``{}``), no ``Permissions-Policy`` header will be
+added to the response for that view.
+
+For example, to disable only geolocation on a particular view:
+
+.. code-block:: python
+
+    from django.shortcuts import render
+    from django_permissions_policy.decorators import permissions_policy_override
+
+
+    @permissions_policy_override(
+        {
+            "geolocation": [],
+        }
+    )
+    def puppy_park_view(request):
+        return render(request, "puppies/park.html")
+
+… or, to not set a permissions policy at all on a particular view:
+
+.. code-block:: python
+
+    from django.shortcuts import render
+    from django_permissions_policy.decorators import permissions_policy_override
+
+
+    @permissions_policy_override({})
+    def puppy_nap_view(request):
+        return render(request, "puppies/nap.html")
+
+``permissions_policy_report_only_override(config)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overrides the ``Permissions-Policy-Report-Only`` header for the decorated view, using a
+dictionary in the same format as the ``PERMISSIONS_POLICY_REPORT_ONLY`` setting.
+
+If ``config`` is an empty mapping (``{}``), no ``Permissions-Policy-Report-Only`` header
+will be added to the response for that view.
+
+For example, to test a policy that only restricts autoplay for a particular view:
+
+.. code-block:: python
+
+    from django.shortcuts import render
+    from django_permissions_policy.decorators import permissions_policy_report_only_override
+
+
+    @permissions_policy_report_only_override(
+        {
+            "autoplay": [],
+        }
+    )
+    def puppy_tricks_view(request):
+        return render(request, "puppies/tricks.html")
+
+…or, to not set a report-only permissions policy at all on a particular view:
+
+.. code-block:: python
+
+    from django.shortcuts import render
+    from django_permissions_policy.decorators import permissions_policy_report_only_override
+
+
+    @permissions_policy_report_only_override({})
+    def puppy_bath_view(request):
+        return render(request, "puppies/bath.html")

@@ -150,21 +150,29 @@ class PermissionsPolicyMiddleware:
             return self.__acall__(request)
         response = self.get_response(request)
         assert isinstance(response, HttpResponseBase)  # type narrow
-
-        if permissions_policy := self.permissions_policy:
-            response["Permissions-Policy"] = permissions_policy
-        if permissions_policy_report_only := self.permissions_policy_report_only:
-            response["Permissions-Policy-Report-Only"] = permissions_policy_report_only
-        return response
+        return self._apply_headers(response)
 
     async def __acall__(self, request: HttpRequest) -> HttpResponseBase:
         result = self.get_response(request)
         assert not isinstance(result, HttpResponseBase)  # type narrow
         response = await result
-        if permissions_policy := self.permissions_policy:
-            response["Permissions-Policy"] = permissions_policy
-        if permissions_policy_report_only := self.permissions_policy_report_only:
-            response["Permissions-Policy-Report-Only"] = permissions_policy_report_only
+        return self._apply_headers(response)
+
+    def _apply_headers(self, response: HttpResponseBase) -> HttpResponseBase:
+        if hasattr(response, "_permissions_policy_override"):
+            if response._permissions_policy_override:
+                response["Permissions-Policy"] = response._permissions_policy_override
+        elif value := self.permissions_policy:
+            response["Permissions-Policy"] = value
+
+        if hasattr(response, "_permissions_policy_report_only_override"):
+            if response._permissions_policy_report_only_override:
+                response["Permissions-Policy-Report-Only"] = (
+                    response._permissions_policy_report_only_override
+                )
+        elif value := self.permissions_policy_report_only:
+            response["Permissions-Policy-Report-Only"] = value
+
         return response
 
     @cached_property
@@ -181,8 +189,8 @@ class PermissionsPolicyMiddleware:
             setting_name="PERMISSIONS_POLICY_REPORT_ONLY",
         )
 
+    @staticmethod
     def compute_header_value(
-        self,
         setting: dict[str, str | list[str] | tuple[str]],
         setting_name: str,
     ) -> str:
