@@ -2,8 +2,8 @@
 Changelog
 =========
 
-Pending
--------
+4.31.0 (2026-06-12)
+-------------------
 
 * Added decorators for per-view header control: ``@permissions_policy_override`` and ``@permissions_policy_report_only_override``.
 
