@@ -5,6 +5,8 @@ Changelog
 Pending
 -------
 
+* Added decorators for per-view header control: ``@permissions_policy_override`` and ``@permissions_policy_report_only_override``.
+
 * Made ``ImproperlyConfigured`` errors name the responsible setting.
 
 4.30.0 (2026-05-13)
