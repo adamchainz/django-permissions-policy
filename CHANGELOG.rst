@@ -2,12 +2,18 @@
 Changelog
 =========
 
-Unreleased
-----------
+Pending
+-------
 
 * Add Django 6.1 support.
 
 * Drop Django 4.2 to 5.1 support.
+
+* Update feature list from Chrome and Firefox sources.
+
+  New features:
+
+  * ``webnn``
 
 4.31.0 (2026-06-12)
 -------------------

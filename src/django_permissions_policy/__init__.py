@@ -110,6 +110,7 @@ _FEATURE_NAMES: set[str] = {
     "vertical-scroll",
     "web-app-installation",
     "web-share",
+    "webnn",
     "window-management",
     "writer",
     "xr-spatial-tracking",
