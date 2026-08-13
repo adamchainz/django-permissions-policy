@@ -49,7 +49,7 @@ def permissions_policy_override(
     config: dict[str, str | list[str] | tuple[str]],
 ) -> Callable[[_ViewFunc], _ViewFunc]:
     header_value = PermissionsPolicyMiddleware.compute_header_value(
-        config, setting_name="permissions_policy_override"
+        config, name="permissions_policy_override"
     )
     return _make_decorator("_permissions_policy_override", header_value)
 
@@ -58,6 +58,6 @@ def permissions_policy_report_only_override(
     config: dict[str, str | list[str] | tuple[str]],
 ) -> Callable[[_ViewFunc], _ViewFunc]:
     header_value = PermissionsPolicyMiddleware.compute_header_value(
-        config, setting_name="permissions_policy_report_only_override"
+        config, name="permissions_policy_report_only_override"
     )
     return _make_decorator("_permissions_policy_report_only_override", header_value)

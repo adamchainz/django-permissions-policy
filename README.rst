@@ -118,6 +118,20 @@ You may see warnings in the console for unavailable features in the header - the
 For backwards compatibility with old configuration, the value ``'none'`` is supported in lists, but ignored - it's preferable to use the empty list instead.
 It doesn't make sense to specify ``'none'`` alongside other values.
 
+Middleware arguments
+~~~~~~~~~~~~~~~~~~~~
+
+``PermissionsPolicyMiddleware`` also accepts two keyword-only arguments, which take precedence over the equivalent settings:
+
+* ``policy`` - a dictionary in the same format as the ``PERMISSIONS_POLICY`` setting.
+* ``report_only_policy`` - a dictionary in the same format as the ``PERMISSIONS_POLICY_REPORT_ONLY`` setting.
+
+When an argument is ``None`` (the default), the corresponding setting is used, and changes to it (such as with ``override_settings()`` in tests) take effect.
+When an argument is given, the setting is ignored for that instance, and the header value is computed and validated at instantiation time.
+Note that an empty dictionary (``{}``) is a value meaning “send no header”, which is different to ``None`` meaning “use the setting”.
+
+Django only ever instantiates middleware with ``get_response``, so these arguments are for when you construct instances yourself, such as within another middleware that dispatches between several instances.
+
 Examples
 ~~~~~~~~
 

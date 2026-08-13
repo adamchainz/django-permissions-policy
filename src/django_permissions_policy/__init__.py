@@ -131,6 +131,9 @@ class PermissionsPolicyMiddleware:
             Callable[[HttpRequest], HttpResponseBase]
             | Callable[[HttpRequest], Awaitable[HttpResponseBase]]
         ),
+        *,
+        policy: dict[str, str | list[str] | tuple[str]] | None = None,
+        report_only_policy: dict[str, str | list[str] | tuple[str]] | None = None,
     ) -> None:
         self.get_response = get_response
         self.async_mode = iscoroutinefunction(self.get_response)
@@ -140,8 +143,25 @@ class PermissionsPolicyMiddleware:
             # inside __call__ to avoid swapping out dunder methods
             markcoroutinefunction(self)
 
-        self.permissions_policy  # noqa: B018 - Access at setup so ImproperlyConfigured can be raised
-        self.permissions_policy_report_only  # noqa: B018 - Access at setup so ImproperlyConfigured can be raised
+        # Values from arguments can never change, so compute eagerly. This also
+        # validates them, like the eager access of the setting-based values below.
+        if policy is not None:
+            self.permissions_policy = self.compute_header_value(
+                policy, name="'policy' argument"
+            )
+        else:
+            self.permissions_policy  # noqa: B018 - Access at setup so ImproperlyConfigured can be raised
+
+        if report_only_policy is not None:
+            self.permissions_policy_report_only = self.compute_header_value(
+                report_only_policy, name="'report_only_policy' argument"
+            )
+        else:
+            self.permissions_policy_report_only  # noqa: B018 - Access at setup so ImproperlyConfigured can be raised
+
+        self.policy_from_argument = policy is not None
+        self.report_only_policy_from_argument = report_only_policy is not None
+
         receiver(setting_changed)(self.clear_header_value)
 
     def __call__(
@@ -180,27 +200,25 @@ class PermissionsPolicyMiddleware:
     def permissions_policy(self) -> str:
         return self.compute_header_value(
             getattr(settings, "PERMISSIONS_POLICY", {}),
-            setting_name="PERMISSIONS_POLICY",
+            name="PERMISSIONS_POLICY",
         )
 
     @cached_property
     def permissions_policy_report_only(self) -> str:
         return self.compute_header_value(
             getattr(settings, "PERMISSIONS_POLICY_REPORT_ONLY", {}),
-            setting_name="PERMISSIONS_POLICY_REPORT_ONLY",
+            name="PERMISSIONS_POLICY_REPORT_ONLY",
         )
 
     @staticmethod
     def compute_header_value(
-        setting: dict[str, str | list[str] | tuple[str]],
-        setting_name: str,
+        policy: dict[str, str | list[str] | tuple[str]],
+        name: str,
     ) -> str:
         pieces = []
-        for feature, values in sorted(setting.items()):
+        for feature, values in sorted(policy.items()):
             if feature not in _FEATURE_NAMES:
-                raise ImproperlyConfigured(
-                    f"Unknown feature '{feature}' in {setting_name}"
-                )
+                raise ImproperlyConfigured(f"Unknown feature '{feature}' in {name}")
             if isinstance(values, str):
                 values = (values,)
 
@@ -219,11 +237,15 @@ class PermissionsPolicyMiddleware:
 
     def clear_header_value(self, setting: str, **kwargs: object) -> None:
         if setting == "PERMISSIONS_POLICY":
+            if self.policy_from_argument:
+                return
             try:
                 del self.permissions_policy
             except AttributeError:
                 pass
         elif setting == "PERMISSIONS_POLICY_REPORT_ONLY":
+            if self.report_only_policy_from_argument:
+                return
             try:
                 del self.permissions_policy_report_only
             except AttributeError:

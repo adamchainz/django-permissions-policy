@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+from collections.abc import Awaitable
 from http import HTTPStatus
 
 import pytest
 from django.core.exceptions import ImproperlyConfigured
+from django.http import HttpResponse, HttpResponseBase
 from django.test import RequestFactory, SimpleTestCase, override_settings
+
+from django_permissions_policy import PermissionsPolicyMiddleware
 
 
 class PermissionsPolicyMiddlewareTests(SimpleTestCase):
@@ -144,3 +148,154 @@ class PermissionsPolicyMiddlewareTests(SimpleTestCase):
 
         assert resp.status_code == HTTPStatus.OK
         assert resp["Permissions-Policy-Report-Only"] == "geolocation=(self)"
+
+
+class PermissionsPolicyMiddlewareArgumentTests(SimpleTestCase):
+    request_factory = RequestFactory()
+
+    def get_response(self, request):
+        return HttpResponse("Hello World")
+
+    async def aget_response(self, request):
+        return HttpResponse("Hello World")
+
+    @override_settings(PERMISSIONS_POLICY={"geolocation": []})
+    def test_policy_argument_used_instead_of_setting(self):
+        middleware = PermissionsPolicyMiddleware(
+            self.get_response, policy={"geolocation": "self"}
+        )
+
+        resp = middleware(self.request_factory.get("/"))
+
+        assert isinstance(resp, HttpResponseBase)
+        assert resp["Permissions-Policy"] == "geolocation=(self)"
+
+    @override_settings(PERMISSIONS_POLICY_REPORT_ONLY={"geolocation": []})
+    def test_report_only_policy_argument_used_instead_of_setting(self):
+        middleware = PermissionsPolicyMiddleware(
+            self.get_response, report_only_policy={"geolocation": "self"}
+        )
+
+        resp = middleware(self.request_factory.get("/"))
+
+        assert isinstance(resp, HttpResponseBase)
+        assert resp["Permissions-Policy-Report-Only"] == "geolocation=(self)"
+
+    @override_settings(PERMISSIONS_POLICY={"geolocation": []})
+    def test_empty_policy_argument_sends_no_header(self):
+        middleware = PermissionsPolicyMiddleware(self.get_response, policy={})
+
+        resp = middleware(self.request_factory.get("/"))
+
+        assert isinstance(resp, HttpResponseBase)
+        assert "Permissions-Policy" not in resp
+
+    @override_settings(PERMISSIONS_POLICY_REPORT_ONLY={"geolocation": []})
+    def test_empty_report_only_policy_argument_sends_no_header(self):
+        middleware = PermissionsPolicyMiddleware(
+            self.get_response, report_only_policy={}
+        )
+
+        resp = middleware(self.request_factory.get("/"))
+
+        assert isinstance(resp, HttpResponseBase)
+        assert "Permissions-Policy-Report-Only" not in resp
+
+    @override_settings(
+        PERMISSIONS_POLICY={"geolocation": []},
+        PERMISSIONS_POLICY_REPORT_ONLY={"autoplay": []},
+    )
+    def test_none_falls_back_to_settings(self):
+        middleware = PermissionsPolicyMiddleware(self.get_response)
+
+        resp = middleware(self.request_factory.get("/"))
+
+        assert isinstance(resp, HttpResponseBase)
+        assert resp["Permissions-Policy"] == "geolocation=()"
+        assert resp["Permissions-Policy-Report-Only"] == "autoplay=()"
+
+    def test_invalid_policy_argument(self):
+        with pytest.raises(
+            ImproperlyConfigured,
+            match="Unknown feature 'accelerometor' in 'policy' argument",
+        ):
+            PermissionsPolicyMiddleware(
+                self.get_response, policy={"accelerometor": "self"}
+            )
+
+    def test_invalid_report_only_policy_argument(self):
+        with pytest.raises(
+            ImproperlyConfigured,
+            match="Unknown feature 'accelerometor' in 'report_only_policy' argument",
+        ):
+            PermissionsPolicyMiddleware(
+                self.get_response, report_only_policy={"accelerometor": "self"}
+            )
+
+    def test_invalid_setting_names_setting(self):
+        with (
+            override_settings(PERMISSIONS_POLICY={"accelerometor": "self"}),
+            pytest.raises(
+                ImproperlyConfigured,
+                match="Unknown feature 'accelerometor' in PERMISSIONS_POLICY",
+            ),
+        ):
+            PermissionsPolicyMiddleware(self.get_response)
+
+    def test_invalid_report_only_setting_names_setting(self):
+        with (
+            override_settings(PERMISSIONS_POLICY_REPORT_ONLY={"accelerometor": "self"}),
+            pytest.raises(
+                ImproperlyConfigured,
+                match=(
+                    "Unknown feature 'accelerometor' in PERMISSIONS_POLICY_REPORT_ONLY"
+                ),
+            ),
+        ):
+            PermissionsPolicyMiddleware(self.get_response)
+
+    def test_override_settings_affects_setting_sourced_instance(self):
+        middleware = PermissionsPolicyMiddleware(self.get_response)
+
+        with override_settings(
+            PERMISSIONS_POLICY={"geolocation": "self"},
+            PERMISSIONS_POLICY_REPORT_ONLY={"autoplay": "self"},
+        ):
+            resp = middleware(self.request_factory.get("/"))
+
+        assert isinstance(resp, HttpResponseBase)
+        assert resp["Permissions-Policy"] == "geolocation=(self)"
+        assert resp["Permissions-Policy-Report-Only"] == "autoplay=(self)"
+
+    def test_override_settings_does_not_affect_argument_sourced_instance(self):
+        middleware = PermissionsPolicyMiddleware(
+            self.get_response,
+            policy={"geolocation": []},
+            report_only_policy={"autoplay": []},
+        )
+
+        with override_settings(
+            PERMISSIONS_POLICY={"geolocation": "self"},
+            PERMISSIONS_POLICY_REPORT_ONLY={"autoplay": "self"},
+        ):
+            resp = middleware(self.request_factory.get("/"))
+
+        assert isinstance(resp, HttpResponseBase)
+        assert resp["Permissions-Policy"] == "geolocation=()"
+        assert resp["Permissions-Policy-Report-Only"] == "autoplay=()"
+
+    @override_settings(PERMISSIONS_POLICY={"geolocation": []})
+    async def test_async_policy_argument(self):
+        middleware = PermissionsPolicyMiddleware(
+            self.aget_response,
+            policy={"geolocation": "self"},
+            report_only_policy={"autoplay": "self"},
+        )
+
+        coroutine = middleware(self.request_factory.get("/"))
+        assert isinstance(coroutine, Awaitable)
+        resp = await coroutine
+        assert isinstance(resp, HttpResponseBase)
+
+        assert resp["Permissions-Policy"] == "geolocation=(self)"
+        assert resp["Permissions-Policy-Report-Only"] == "autoplay=(self)"
