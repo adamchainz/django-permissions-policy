@@ -5,6 +5,8 @@ Changelog
 Unreleased
 ----------
 
+* Support Python 3.15.
+
 * Add ``policy`` and ``report_only_policy`` keyword-only arguments to ``PermissionsPolicyMiddleware.__init__()``, which take precedence over the ``PERMISSIONS_POLICY`` and ``PERMISSIONS_POLICY_REPORT_ONLY`` settings.
   This allows composing several differently-configured instances, such as to send a different policy for admin pages.
 
