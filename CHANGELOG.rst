@@ -2,6 +2,15 @@
 Changelog
 =========
 
+Unreleased
+----------
+
+* Add ``policy`` and ``report_only_policy`` keyword-only arguments to ``PermissionsPolicyMiddleware.__init__()``, which take precedence over the ``PERMISSIONS_POLICY`` and ``PERMISSIONS_POLICY_REPORT_ONLY`` settings.
+  This allows composing several differently-configured instances, such as to send a different policy for admin pages.
+
+  `PR #557 <https://github.com/adamchainz/django-permissions-policy/pull/557>`__.
+  Thanks to Orazio for the question in `Issue #556 <https://github.com/adamchainz/django-permissions-policy/issues/556>`__.
+
 * Switch package build backend from setuptools to `uv_build <https://docs.astral.sh/uv/concepts/build-backend/>`__.
   This makes builds with uv about nine times faster, since uv runs the backend natively, without creating a build environment or spawning a Python process.
   Additionally, source distributions no longer include test files, which setuptools previously included incompletely, missing the files needed to actually run them.
