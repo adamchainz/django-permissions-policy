@@ -162,7 +162,8 @@ class PermissionsPolicyMiddleware:
         self.policy_from_argument = policy is not None
         self.report_only_policy_from_argument = report_only_policy is not None
 
-        receiver(setting_changed)(self.clear_header_value)
+        if not (self.policy_from_argument and self.report_only_policy_from_argument):
+            receiver(setting_changed)(self.clear_header_value)
 
     def __call__(
         self, request: HttpRequest

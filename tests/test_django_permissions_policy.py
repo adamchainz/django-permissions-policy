@@ -284,6 +284,28 @@ class PermissionsPolicyMiddlewareArgumentTests(SimpleTestCase):
         assert resp["Permissions-Policy"] == "geolocation=()"
         assert resp["Permissions-Policy-Report-Only"] == "autoplay=()"
 
+    def test_override_settings_does_not_affect_policy_argument_only(self):
+        middleware = PermissionsPolicyMiddleware(
+            self.get_response, policy={"geolocation": []}
+        )
+
+        with override_settings(PERMISSIONS_POLICY={"geolocation": "self"}):
+            resp = middleware(self.request_factory.get("/"))
+
+        assert isinstance(resp, HttpResponseBase)
+        assert resp["Permissions-Policy"] == "geolocation=()"
+
+    def test_override_settings_does_not_affect_report_only_policy_argument_only(self):
+        middleware = PermissionsPolicyMiddleware(
+            self.get_response, report_only_policy={"autoplay": []}
+        )
+
+        with override_settings(PERMISSIONS_POLICY_REPORT_ONLY={"autoplay": "self"}):
+            resp = middleware(self.request_factory.get("/"))
+
+        assert isinstance(resp, HttpResponseBase)
+        assert resp["Permissions-Policy-Report-Only"] == "autoplay=()"
+
     @override_settings(PERMISSIONS_POLICY={"geolocation": []})
     async def test_async_policy_argument(self):
         middleware = PermissionsPolicyMiddleware(
