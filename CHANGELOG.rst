@@ -2,6 +2,19 @@
 Changelog
 =========
 
+Pending
+-------
+
+* Update feature list from Chrome and Firefox sources.
+
+  Removed features:
+
+  * ``attribution-reporting``
+  * ``join-ad-interest-group``
+  * ``private-aggregation``
+  * ``record-ad-auction-events``
+  * ``run-ad-auction``
+
 4.33.0 (2026-08-14)
 -------------------
 
