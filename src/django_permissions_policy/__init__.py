@@ -65,6 +65,7 @@ _FEATURE_NAMES: set[str] = {
     "gamepad",
     "geolocation",
     "gyroscope",
+    "haptics",
     "hid",
     "identity-credentials-get",
     "idle-detection",
