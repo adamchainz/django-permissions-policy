@@ -3,11 +3,11 @@ revision = 3
 requires-python = ">=3.10"
 resolution-markers = [
     "python_full_version >= '3.12' and extra != 'group-25-django-permissions-policy-django52' and extra != 'group-25-django-permissions-policy-django60' and extra == 'group-25-django-permissions-policy-django61'",
-    "python_full_version < '3.12' and extra != 'group-25-django-permissions-policy-django52' and extra != 'group-25-django-permissions-policy-django60' and extra == 'group-25-django-permissions-policy-django61'",
     "python_full_version >= '3.12' and extra != 'group-25-django-permissions-policy-django52' and extra == 'group-25-django-permissions-policy-django60' and extra != 'group-25-django-permissions-policy-django61'",
+    "python_full_version >= '3.12' and extra != 'group-25-django-permissions-policy-django52' and extra != 'group-25-django-permissions-policy-django60' and extra != 'group-25-django-permissions-policy-django61'",
+    "python_full_version < '3.12' and extra != 'group-25-django-permissions-policy-django52' and extra != 'group-25-django-permissions-policy-django60' and extra == 'group-25-django-permissions-policy-django61'",
     "python_full_version < '3.12' and extra != 'group-25-django-permissions-policy-django52' and extra == 'group-25-django-permissions-policy-django60' and extra != 'group-25-django-permissions-policy-django61'",
     "extra == 'group-25-django-permissions-policy-django52' and extra != 'group-25-django-permissions-policy-django60' and extra != 'group-25-django-permissions-policy-django61'",
-    "python_full_version >= '3.12' and extra != 'group-25-django-permissions-policy-django52' and extra != 'group-25-django-permissions-policy-django60' and extra != 'group-25-django-permissions-policy-django61'",
     "python_full_version < '3.12' and extra != 'group-25-django-permissions-policy-django52' and extra != 'group-25-django-permissions-policy-django60' and extra != 'group-25-django-permissions-policy-django61'",
 ]
 conflicts = [[
@@ -226,7 +226,7 @@ wheels = [
 
 [[package]]
 name = "django-permissions-policy"
-version = "4.33.0"
+version = "4.34.0"
 source = { editable = "." }
 dependencies = [
     { name = "asgiref" },
