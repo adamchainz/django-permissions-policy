@@ -7,6 +7,10 @@ Pending
 
 * Update feature list from Chrome and Firefox sources.
 
+  New features:
+
+  * ``haptics``
+
   Removed features:
 
   * ``attribution-reporting``
