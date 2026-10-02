@@ -1,6 +1,6 @@
 #!/usr/bin/env uv run --script
 # /// script
-# requires-python = ">=3.10"
+# requires-python = ">=3.15"
 # dependencies = ["urllib3"]
 # ///
 from __future__ import annotations
